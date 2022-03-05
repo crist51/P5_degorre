@@ -74,31 +74,42 @@ const products = [
 ];
 
 
-const kanapImg = document.createElement('img');//Création d'une image vide
-    kanapImg.src = "test" +".jpeg";//On définit la source de l'image
-    kanapImg.classList.add("#");
+var ligneObjetProduct = 0;//partit de objet concerné
+const numberImgKanap =  ligneObjetProduct + 1;//image canape
+
+const kanapImg = document.createElement("img");//Création d'une image vide
+    kanapImg.src = "../../back/images/kanap"+ "0" + numberImgKanap +".jpeg";//On définit la source de l'image
 
 const kanapName = document.createElement("h3");//non du tag element il est creer mais pas visible et c'est un article
-    kanapName.classList.add("productName");
-    kanapName.textContent = (products[0].name)//element inserer
+    kanapName.textContent = (products[ligneObjetProduct].name)//nom canape
 
 const kanapDescription = document.createElement("p");
     kanapDescription.classList.add("productDescription");
-    kanapDescription.textContent = (products[0].description)
+    kanapDescription.textContent = (products[ligneObjetProduct].description);//description canape
 
 
 
 
-
-  const lienProduct = document.createElement('a');//Création d'un lien
+//a voir comment faire
+  const lienProduct = document.createElement("a");//Création d'un lien
     lienProduct.href = "product" +".html"+"?id=42";//On définit la source ddu lien
     items.appendChild(lienProduct)
 
+const article = document.createElement("article");//Création d'articme'
+lienProduct.appendChild(article);//On ajoute dans le lien
 
-const article = document.createElement('article');//Création d'une image vide
-lienProduct.appendChild(article)
+  article.appendChild(kanapImg);//On ajoute l'img dans l'article'
+  article.appendChild(kanapName);//On ajoute h3 dans l'article'
+  article.appendChild(kanapDescription);//On ajoute p dans l'article'
 
-  article.appendChild(kanapImg);//On ajoute l'image dans le conteneur
-  article.appendChild(kanapName);//On ajoute l'image dans le conteneur
-  article.appendChild(kanapDescription);//On ajoute l'image dans le conteneur
 
+function afficherLesProducts(listKanap){
+  while (products[ligneObjetProduct] <= products.lenght){//inf ou egal
+    items.appendChild(lienProduct)//on creer le lien dans items
+      lienProduct.appendChild(article);//On ajoute dans le lien
+        article.appendChild(kanapImg);//On ajoute l'img dans l'article'
+        article.appendChild(kanapName);//On ajoute h3 dans l'article'
+        article.appendChild(kanapDescription);//On ajoute p dans l'article'
+      var ligneObjetProduct = ligneObjetProduct + 1;// on ajoute 1
+  }
+}
