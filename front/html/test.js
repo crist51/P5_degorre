@@ -102,13 +102,3 @@ lienProduct.appendChild(article)
   article.appendChild(kanapName);//On ajoute l'image dans le conteneur
   article.appendChild(kanapDescription);//On ajoute l'image dans le conteneur
 
-
-  /*
-  on a une serction qui est creer "items"
-
-  __on a un lien du canap
-    article
-      img src
-      h3
-      p
-*/
