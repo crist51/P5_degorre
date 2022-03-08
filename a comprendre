@@ -1,8 +1,8 @@
 faut recuperer l'id lorsque je clique sur le lien su  canape voulut
-dans le but de donner les bonne information  de la pages 
 
-faudra envoyer le canape anssi que la quantité a la pages carts
+https://course.oc-static.com/projects/DWJ_FR_P5/DW+P5+-+Specifications+fonctionnelles.pdf
+derniere pages 
 
-: http://localhost:3000/api/products
+dans le but de donner les bonne information  de la pages
 
-nodemon server
+Id rajouter sur le html pour img
