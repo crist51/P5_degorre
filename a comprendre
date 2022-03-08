@@ -1,0 +1,8 @@
+faut recuperer l'id lorsque je clique sur le lien su  canape voulut
+dans le but de donner les bonne information  de la pages 
+
+faudra envoyer le canape anssi que la quantité a la pages carts
+
+: http://localhost:3000/api/products
+
+nodemon server
