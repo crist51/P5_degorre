@@ -7,7 +7,7 @@ fetch("http://localhost:3000/api/products")
   /*ligneObjetProduct*/
 
 var ligneObjetProduct = 0;//partit de objet concerné
-while (ligneObjetProduct < [8]){
+while (ligneObjetProduct < reponceAPI.length){
 //--------------création lien index href
   var lienProduct = document.createElement("a");
   lienProduct.href = "product.html?id="+ reponceAPI[ligneObjetProduct]._id;
