@@ -22,11 +22,11 @@ fetch("http://localhost:3000/api/products/"+ id)
 
   //--------------création title & price & description
   title.textContent = (reponceAPI.name);
-  price.textContent = (reponceAPI.price)/10;
+  price.textContent = (reponceAPI.price);
   description.textContent = (reponceAPI.description);
 
 //-----------------------------color
-var color= 0
+var color= 1
 while (color < reponceAPI.colors.length) {
     var colorOption = document.createElement("option");//création d'option
     colorOption.value = color;//ajout de la valeur sur l'option
@@ -35,18 +35,21 @@ while (color < reponceAPI.colors.length) {
     colors.appendChild(colorOption);//On ajoute option dans le HTML;
     color++;
   }
-  const idForm = document.querySelector("#colors")
-  console.log(reponceAPI.colors[1]);
-  const select = document.getElementById("colors")
-  const colorChoosen = select.value;
+
+
+const select = document.getElementById("colors");
+console.log(select);
+//const valeur = select.value;console.log(colors.value);
+const colorChoosen = select.value;
+console.log(colorChoosen);
 //////////////////////////////////////////
 //Probleme arrive pas a recup la saisie//
 ////////////////////////////////////////
-
+var alpha = select.value
 //-------------------------quantity
-//var quantity = document.getElementById("quantity").value;
-console.log(quantity);
-const inputQuantity = document.getElementById("quantity");
+var input = document.getElementById("quantity").value;
+
+
 //-------------------------La gestion du panier
 
 //selectionner le btn dans le dom
@@ -61,9 +64,13 @@ envoyerPanier.addEventListener("click",(event)=>{
   const panier = {//optionsProduit
     "color" : colorChoosen,
     "nom" : reponceAPI.name,
-    "price" : reponceAPI.price/10,
+    "price" : reponceAPI.price,
     "_id" : reponceAPI._id,
-    "quanity" : inputQuantity,
+    "quanity" : input,
+    "var2":select.value,
+    //"var4": select(value),
+    "var1":colors.value,
+    //"var3": colors(value),
     };
   console.log(panier);
 })
