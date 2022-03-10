@@ -35,42 +35,38 @@ while (color < reponceAPI.colors.length) {
     colors.appendChild(colorOption);//On ajoute option dans le HTML;
     color++;
   }
-
-var r = document.querySelector("#colors");
-console.log(r);
-//selection id du form
-const idForm = document.querySelector("#colors")
-
-//metre le choix du formulaire var
-var choixForm = idForm.value
-
+  const idForm = document.querySelector("#colors")
+  console.log(reponceAPI.colors[1]);
+  const select = document.getElementById("colors")
+  const colorChoosen = select.value;
 //////////////////////////////////////////
 //Probleme arrive pas a recup la saisie//
 ////////////////////////////////////////
 
 //-------------------------quantity
-var quantity = document.getElementById("quantity").value;
+//var quantity = document.getElementById("quantity").value;
 console.log(quantity);
-
-
+const inputQuantity = document.getElementById("quantity");
 //-------------------------La gestion du panier
 
-
-//selectionner le btn dans el dom
+//selectionner le btn dans le dom
 const envoyerPanier = document.querySelector("#addToCart")
 console.log(addToCart);
 //écouter le btn et envoyer dans le panier
 envoyerPanier.addEventListener("click",(event)=>{
   event.preventDefault();
-})
+  //id formulaire
 
-//-------------------------recuperation des valeur
+  //-------------------------recuperation des valeur
   const panier = {//optionsProduit
-    "color" : choixForm,
+    "color" : colorChoosen,
     "nom" : reponceAPI.name,
     "price" : reponceAPI.price/10,
     "_id" : reponceAPI._id,
-    "quanity" : quantity,
+    "quanity" : inputQuantity,
     };
   console.log(panier);
+})
+
+
 });
