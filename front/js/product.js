@@ -22,7 +22,7 @@ fetch("http://localhost:3000/api/products/"+ id)
 
   //--------------création title & price & description
   title.textContent = (reponceAPI.name);
-  price.textContent = (reponceAPI.price);
+  price.textContent = (reponceAPI.price)/10;
   description.textContent = (reponceAPI.description);
 
 //-----------------------------color
@@ -35,29 +35,42 @@ while (color < reponceAPI.colors.length) {
     colors.appendChild(colorOption);//On ajoute option dans le HTML;
     color++;
   }
-console.log(colors);
 
-function Recup_select_info(obj,choix_rech){
-  var idx = obj.selectedIndex;
-  if((choix_rech) && (choix_rech == 'valeur')){ return obj.options[idx].value;} // récupère valeur du select
-  else if((choix_rech) && (choix_rech == 'texte')){ return obj.options[idx].innerHTML;} // récupère le contenu html du select
-  else{ return idx;} // récupère l'index de position dans le tableau select
-}
-function remplissageAuto(obj) {
-  var valeur_alias = Recup_select_info(obj);
-  valeur_alias += Recup_select_info(obj,'valeur');
-  valeur_alias += Recup_select_info(obj,'texte');
-  console.log(valeur_alias);
+var r = document.querySelector("#colors");
+console.log(r);
+//selection id du form
+const idForm = document.querySelector("#colors")
 
-}
+//metre le choix du formulaire var
+var choixForm = idForm.value
 
+//////////////////////////////////////////
+//Probleme arrive pas a recup la saisie//
+////////////////////////////////////////
 
-
+//-------------------------quantity
+var quantity = document.getElementById("quantity").value;
+console.log(quantity);
 
 
-// //select le bouton dans le dom
-// const envoyerPanier = document.querySelector("#envoyer")
-// //ecouter le bouton
-// envoyerPanier.addEventListener("click",(event)=> {
-//   event.preventDefault();//voir mdm
+//-------------------------La gestion du panier
+
+
+//selectionner le btn dans el dom
+const envoyerPanier = document.querySelector("#addToCart")
+console.log(addToCart);
+//écouter le btn et envoyer dans le panier
+envoyerPanier.addEventListener("click",(event)=>{
+  event.preventDefault();
+})
+
+//-------------------------recuperation des valeur
+  const panier = {//optionsProduit
+    "color" : choixForm,
+    "nom" : reponceAPI.name,
+    "price" : reponceAPI.price/10,
+    "_id" : reponceAPI._id,
+    "quanity" : quantity,
+    };
+  console.log(panier);
 });

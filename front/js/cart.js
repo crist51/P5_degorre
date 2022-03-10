@@ -44,13 +44,11 @@ function Recup_select_info(obj,choix_rech){
     if((choix_rech) && (choix_rech == 'valeur')){ return obj.options[idx].value;} // récupère valeur du select
     else if((choix_rech) && (choix_rech == 'texte')){ return obj.options[idx].innerHTML;} // récupère le contenu html du select
     else{ return idx;} // récupère l'index de position dans le tableau select
-}
+};
 
 function remplissageAuto(obj) {
     var valeur_alias = Recup_select_info(obj);
     //valeur_alias += Recup_select_info(obj,'valeur');
     //valeur_alias += Recup_select_info(obj,'texte');
     console.log(valeur_alias);
-
 }
-
