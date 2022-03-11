@@ -1,3 +1,4 @@
+
 //recuperation id
 var str = window.location.href
 console.log(str);
@@ -15,11 +16,12 @@ fetch("http://localhost:3000/api/products/"+ id)
 
 
   //--------------création lien img
-  var kanapImg = document.createElement("img");
+  const kanapImg = document.createElement("img");
   kanapImg.src = (reponceAPI.imageUrl);
   kanapImg.alt = (reponceAPI.altTxt);
   kanapImg.classList.add("item__img");
   item__img.appendChild(kanapImg);
+
 
   //--------------création title & price & description
   title.textContent = (reponceAPI.name);
@@ -37,10 +39,6 @@ while (color < reponceAPI.colors.length) {
     color++;
   }
 
-//-------------------------quantity
-var input = document.getElementById("quantity").value;
-
-
 //-------------------------La gestion du panier
 
 //selectionner le btn dans le dom
@@ -50,50 +48,48 @@ console.log(addToCart);
 envoyerPanier.addEventListener("click",(event)=>{
   event.preventDefault();
     
-  //-------------------------couleur chsoisit
+  //-------------------------couleur choisit
   var colorSelect = (reponceAPI.colors[colors.value])//color corespond a la select
   console.log(colorSelect);
+
   //-------------------------quantité voulut
   var quantity = document.getElementById("quantity").value
   console.log(quantity);
+
   //-------------------------recuperation des valeur
 
   const panier = {//optionsProduit
     "color" : colorSelect,
+    "_id" : reponceAPI._id,
     "nom" : reponceAPI.name,
     "price" : reponceAPI.price,
-    "_id" : reponceAPI._id,
+    "img" : reponceAPI.imageUrl,
     "quanity" : quantity,
     };
   console.log(panier);
 
-  //-------------------------local storage
-//stoker les et recup les donné local storage
+//-------------------------local storage
 
-//declare la var produitEnreistrer
-let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));
-//JSON.parse pour convertir JSON en JAVASCIPT
-console.log(produitEnregistrerDansLeLocalStorage);
+let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
 
 //popUP création
 const popUp = () =>{
-  if(window.confirm('{reponceAPI.name} option:" ${colorSelect} a bien été ajouté au panier consulter le panier OK ou ANNULER afin de continuer vos achat')){
+  // if(window.confirm("{reponceAPI.name} option: ${colorSelect} a bien été ajouté au panier consulter le panier OK ou ANNULER afin de continuer vos achat")){
+    if(window.confirm('"'+ (reponceAPI.name) +'"' + " couleur : " + (colorSelect) + " a bien été ajouté au panier consulter le panier OK ou ANNULER afin de continuer vos achat")){
   window.location.href = "http://127.0.0.1:5500/front/html/cart.html";//----A MODIFIER
   }
 }
-//si y a des produit dans le local storage sinon le creer
-if(produitEnregistrerDansLeLocalStorage){
+
+if(produitEnregistrerDansLeLocalStorage){//si y a des produit dans le local storage on rajoute un objet 
   produitEnregistrerDansLeLocalStorage.push(panier);
   localStorage.setItem("key",JSON.stringify(produitEnregistrerDansLeLocalStorage));
   //JSON.stringify convertit le JAVASCRIPT en JSON
-  console.log(produitEnregistrerDansLeLocalStorage);
   popUp();
 }
 else{
-  produitEnregistrerDansLeLocalStorage = [];
+  produitEnregistrerDansLeLocalStorage = [];//sinon on creer  la clef
   produitEnregistrerDansLeLocalStorage.push(panier)
   localStorage.setItem("key",JSON.stringify(produitEnregistrerDansLeLocalStorage));
-  console.log(produitEnregistrerDansLeLocalStorage);
   popUp();
 }
 
