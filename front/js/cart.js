@@ -2,6 +2,7 @@
 let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
 console.log(produitEnregistrerDansLeLocalStorage);
 
+///--------------/creation de l'HTML
 
 //--------------création carte produit
 var article = document.createElement("article");
@@ -76,3 +77,15 @@ cart__items.appendChild(article);
                     sup.textContent = "Supprimer"
                     seeting.appendChild(sup)
 
+//---------------Boucle local storage  dinamique quimporte le panier
+
+var key = produitEnregistrerDansLeLocalStorage
+
+var debutBoucle = 0
+console.log(produitEnregistrerDansLeLocalStorage[debutBoucle]);
+console.log(produitEnregistrerDansLeLocalStorage.length);
+
+while (debutBoucle<produitEnregistrerDansLeLocalStorage.length){
+  console.log(produitEnregistrerDansLeLocalStorage[debutBoucle]);
+  debutBoucle++;
+}
