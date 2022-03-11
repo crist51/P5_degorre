@@ -59,11 +59,12 @@ envoyerPanier.addEventListener("click",(event)=>{
   //-------------------------recuperation des valeur
 
   const panier = {//optionsProduit
-    "color" : colorSelect,
+    "colors" : colorSelect,
     "_id" : reponceAPI._id,
-    "nom" : reponceAPI.name,
+    "name" : reponceAPI.name,
     "price" : reponceAPI.price,
-    "img" : reponceAPI.imageUrl,
+    "imageUrl" : reponceAPI.imageUrl,
+    "altTxt": (reponceAPI.altTxt),
     "quanity" : quantity,
     };
   console.log(panier);
