@@ -78,14 +78,19 @@ cart__items.appendChild(article);
                       sup.classList.add("deleteItem")
                       sup.textContent = "Supprimer"
                       seeting.appendChild(sup)
-  debutBoucle++;
+
+                      var t = document.getElementsByClassName('deleteItem');
+                      console.log(t);
+                      //delete Employee.firstname;
+  debutBoucle++
 }
 
-var a = 0
+
+var debutBoucle = 0
 let quantityArray =[];//on creer un tableau qui aura les quantité de chaque article
-while (a < key.length){
-    quantityArray.push(key[a].quantity)//on injecte dans le tableau
-  a++
+while (debutBoucle < key.length){
+    quantityArray.push(key[debutBoucle].quantity)//on injecte dans le tableau
+    debutBoucle++
 }
 console.log(quantityArray);
 
@@ -96,16 +101,17 @@ totalQuantity.textContent = quantiteTotal
 
 
 let priceArray =[];//on creer un tableau qui aura les quantité de chaque article
-var v = 0
-while (v < key.length){
-  var priceTotalArticle = key[v].price * quantityArray[v]//quantiter * prix
+var debutBoucle = 0
+while (debutBoucle < key.length){
+  var priceTotalArticle = key[debutBoucle].price * quantityArray[debutBoucle]//quantiter * prix
   priceArray.push(priceTotalArticle)//on injecte dans le tableau
-  v++
+  debutBoucle++
 }
 console.log(priceArray);
 var reducerPrice = (accumulator,curenceValue) => accumulator + curenceValue
 const priceTotal = priceArray.reduce(reducerPrice);
 
 totalPrice.textContent = priceTotal
+
 
 //file:///E:/NE%20PAS%20EFFACER/Stockage/Nouveau%20dossier/P5_degorre/front/html/cart.html
