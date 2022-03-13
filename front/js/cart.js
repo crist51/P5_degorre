@@ -79,9 +79,15 @@ cart__items.appendChild(article);
                       sup.textContent = "Supprimer"
                       seeting.appendChild(sup)
 
-                      var t = document.getElementsByClassName('deleteItem');
-                      console.log(t);
-                      //delete Employee.firstname;
+                      // var deleteItem = document.getElementsByClassName('deleteItem');
+                      // console.log(deleteItem);
+
+                      
+                      // deleteItem.addEventListener("click",(event)=>{
+                      // event.preventDefault();
+                      // delete (key.debutBoucle);//a la place de "."[] peut etre
+                      // });
+                    
   debutBoucle++
 }
 
@@ -89,6 +95,7 @@ cart__items.appendChild(article);
 var debutBoucle = 0
 let quantityArray =[];//on creer un tableau qui aura les quantité de chaque article
 while (debutBoucle < key.length){
+    console.log(key[debutBoucle].quantity);
     quantityArray.push(key[debutBoucle].quantity)//on injecte dans le tableau
     debutBoucle++
 }
@@ -103,6 +110,7 @@ totalQuantity.textContent = quantiteTotal
 let priceArray =[];//on creer un tableau qui aura les quantité de chaque article
 var debutBoucle = 0
 while (debutBoucle < key.length){
+  console.log(key[debutBoucle].price);
   var priceTotalArticle = key[debutBoucle].price * quantityArray[debutBoucle]//quantiter * prix
   priceArray.push(priceTotalArticle)//on injecte dans le tableau
   debutBoucle++
@@ -112,6 +120,101 @@ var reducerPrice = (accumulator,curenceValue) => accumulator + curenceValue
 const priceTotal = priceArray.reduce(reducerPrice);
 
 totalPrice.textContent = priceTotal
+console.log(priceTotal);
 
 
-//file:///E:/NE%20PAS%20EFFACER/Stockage/Nouveau%20dossier/P5_degorre/front/html/cart.html
+
+// //-------------------------La gestion de commande
+
+
+//selectionner le btn dans le dom
+const Commander = document.querySelector("#order")
+console.log(order);
+//écouter le btn et envoyer dans le panier
+Commander.addEventListener("click",(event)=>{
+  event.preventDefault();
+
+
+  var firstName = document.getElementById("firstName").value
+  console.log(firstName);
+  
+  var lastName = document.getElementById("lastName").value
+  console.log(lastName);
+  
+  var address = document.getElementById("address").value
+  console.log(address);
+  
+  var city =document.getElementById("city").value
+  console.log(city);
+  
+  var email = document.getElementById("email").value
+  console.log(email);
+
+
+  const Command = {//optionsProduit
+    "firstName" : firstName,
+    "lastName" : lastName,
+    "address" : address,
+    "price" : city,
+    "city" : city,
+    "email": email,
+    "panier" : produitEnregistrerDansLeLocalStorage
+    };
+  console.log(Command);
+
+//-------------------------local storage
+
+let CommandDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+
+//popUP création
+// 
+const popUp = () =>{
+  // if(window.confirm("{reponceAPI.name} option: ${colorSelect} a bien été ajouté au panier consulter le panier OK ou ANNULER afin de continuer vos achat")){
+    if(window.confirm( (firstName) + (lastName) +  "\n" +  "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" +"ou pour l\'annuler cliquée sur \"annuler\""))
+      window.location.href = "http://127.0.0.1:5500/front/html/confirmation.html";//----A MODIFIER
+}
+
+if(CommandDansLeLocalStorage){//si y a des produit dans le local storage on rajoute un objet 
+  CommandDansLeLocalStorage.push(Command);
+  localStorage.setItem("CommandEnregistre",JSON.stringify(CommandDansLeLocalStorage));
+  //JSON.stringify convertit le JAVASCRIPT en JSON
+  popUp();
+}
+else{
+  CommandDansLeLocalStorage = [];//sinon on creer  la clef
+  CommandDansLeLocalStorage.replace(Command)//push
+  localStorage.setItem("CommandEnregistre",JSON.stringify(CommandDansLeLocalStorage));
+  popUp();
+}
+
+});
+
+//document.getElementsByTagName("div")[0]
+if (firstName.length <0) {
+}else{
+  firstNameErrorMsg.textContent = "Prénom manquant";
+}
+
+if (lastName.length <0) {
+  
+}else{
+  lastNameErrorMsg.textContent = "Nom manquant";
+}
+
+if (address.length <0) {
+  
+}else{
+  addressErrorMsg.textContent = "Veullez noter adresse";
+}
+
+if (city.length <0) {
+  
+}else{
+  cityErrorMsg.textContent = "Prénom manquant";
+}
+
+if (email.length <0) {
+  
+}else{
+  emailErrorMsg.textContent = "Veuillez mentionnez votre adresse mail";
+}

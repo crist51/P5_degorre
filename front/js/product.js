@@ -6,7 +6,6 @@ var url = new URL(str);
 var id= url.searchParams.get("id")
 console.log(id);
 
-
 fetch("http://localhost:3000/api/products/"+ id)
 .then(function(response){
   return response.json();
@@ -73,25 +72,15 @@ envoyerPanier.addEventListener("click",(event)=>{
 
 let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
 
-//popUP création
-const popUp = () =>{
-  // if(window.confirm("{reponceAPI.name} option: ${colorSelect} a bien été ajouté au panier consulter le panier OK ou ANNULER afin de continuer vos achat")){
-    if(window.confirm('"'+ (reponceAPI.name) +'"' + " couleur : " + (colorSelect) + " a bien été ajouté au panier consulter le panier OK ou ANNULER afin de continuer vos achat")){
-  window.location.href = "http://127.0.0.1:5500/front/html/cart.html";//----A MODIFIER
-  }
-}
-
 if(produitEnregistrerDansLeLocalStorage){//si y a des produit dans le local storage on rajoute un objet 
   produitEnregistrerDansLeLocalStorage.push(panier);
   localStorage.setItem("key",JSON.stringify(produitEnregistrerDansLeLocalStorage));
   //JSON.stringify convertit le JAVASCRIPT en JSON
-  popUp();
 }
 else{
   produitEnregistrerDansLeLocalStorage = [];//sinon on creer  la clef
   produitEnregistrerDansLeLocalStorage.push(panier)
   localStorage.setItem("key",JSON.stringify(produitEnregistrerDansLeLocalStorage));
-  popUp();
 }
 
 });
