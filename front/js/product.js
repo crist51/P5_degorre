@@ -48,7 +48,8 @@ fetch("http://localhost:3000/api/products/" + id)
       colors.appendChild(colorOption);//On ajoute option dans le HTML;
       color++;
     }
-
+    var inputQuantity = document.getElementById("quantity")
+    inputQuantity.value = 0
     //-------------------------La gestion du panier
 
     //selectionner le btn dans le dom
@@ -68,9 +69,7 @@ fetch("http://localhost:3000/api/products/" + id)
       console.log(quantity);
 
       //-------------------------condition de validation panier " voir pour peut etre juste metre un texte d'erreur"
-      var zero = 0
-      if (quantity == zero || quantity > 100 & colorSelect === "valeurDefaut") {
-        //console.log("Veuillez indiquer une coloris" + "\n" + "Ou" + "\n" + "Veuillez indiquer le nombre de produit souhaité compris \"1\"  et \"100\"");
+      if (quantity > 100 || quantity == 0 || colorSelect === "valeurDefaut") {
         alert("Veuillez indiquer une coloris" + "\n" + "Ou" + "\n" + "Veuillez indiquer le nombre de produit souhaité compris \"1\"  et \"100\"")
       } else {
 

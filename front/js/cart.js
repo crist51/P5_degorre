@@ -134,10 +134,7 @@ else {
   totalPrice.textContent = priceTotal
   console.log(priceTotal);
 
-
-
   //-----------------La gestion de commande
-
 
   //selectionner le btn dans le dom
   const Commander = document.querySelector("#order")
@@ -146,8 +143,7 @@ else {
   Commander.addEventListener("click", (event) => {
     event.preventDefault();
 
-    ////-----------------condition d'envoi de command
-
+    //-----------------gestion d'input sur les form
     var firstName = document.getElementById("firstName").value
 
     var lastName = document.getElementById("lastName").value
@@ -160,8 +156,8 @@ else {
 
     //-----------------condition d'envoie de formulaire 
     var a = 0
-    if ( firstName.length == a || lastName.length == a || address.length == a || city.length == a || email.length == a){
-      console.log("Si a n'a pas asser de caracter, j'affiche les erreur");
+    if (firstName.length == a || lastName.length == a || address.length == a || city.length == a || email.length == a) {
+      //Si il y a n'a pas asser de caracter, j'affiche les erreur sur les endroit concerné
       if (firstName.length == a) {
         firstNameErrorMsg.textContent = "Prénom manquant";
 
@@ -187,78 +183,49 @@ else {
       } else { }
 
     } else {
-      console.log("sinom j'envoie le form");
+      //Sinom j'envoie le form
 
 
-    const Command = {//optionsProduit
-      "firstName": firstName,
-      "lastName": lastName,
-      "address": address,
-      "price": city,
-      "city": city,
-      "email": email,
-      "panier": produitEnregistrerDansLeLocalStorage
-    };
-    console.log(Command);
+      //-----------------construction de nombre aléatoire
+      var min = 1;
+      var max = 99999999999999999;//17 chifre sur la command avoir avec le back-end pour avoir la valleur
+      var random = Math.floor(Math.random() * (max - min)) + min;
+      
 
-    //-------------------------local storage
+      const Command = {
+        "firstName": firstName,
+        "lastName": lastName,
+        "address": address,
+        "price": city,
+        "city": city,
+        "email": email,
+        "panier": produitEnregistrerDansLeLocalStorage,
+        "idCommand": random,
+      };
+      console.log(Command);
 
-    let CommandDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+      //-------------------------local storage
 
-    //popUP création
-    // 
-    const popUp = () => {
-      // if(window.confirm("{reponceAPI.name} option: ${colorSelect} a bien été ajouté au panier consulter le panier OK ou ANNULER afin de continuer vos achat")){
-      if (window.confirm((firstName) + (lastName) + "\n" + "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" + "ou pour l\'annuler cliquée sur \"annuler\""))
-        window.location.href = "http://127.0.0.1:5500/front/html/confirmation.html";//----A MODIFIER
+      let CommandDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+
+      //pop-UP de validation
+      // 
+      const popUp = () => {
+        if (window.confirm((firstName) + (lastName) + "\n" + "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" + "ou pour l\'annuler cliquée sur \"annuler\""))
+          window.location.href = "http://127.0.0.1:5500/front/html/confirmation.html";//----A MODIFIER
+      }
+
+      if (CommandDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
+        CommandDansLeLocalStorage.push(Command);
+        localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
+        popUp();
+      }
+      else {
+        CommandDansLeLocalStorage = [];//sinon on creer  le tableau vide
+        CommandDansLeLocalStorage.replace(Command)//on creer la clef
+        localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
+        popUp();
+      }
     }
-
-    if (CommandDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
-      CommandDansLeLocalStorage.push(Command);
-      localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
-      //JSON.stringify convertit le JAVASCRIPT en JSON
-      popUp();
-    }
-    else {
-      CommandDansLeLocalStorage = [];//sinon on creer  la clef
-      CommandDansLeLocalStorage.replace(Command)//push
-      localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
-      popUp();
-    }
-    }//else
-  });//btn
-
-
-
-  /*
-    if (firstName.length < 0) {
-    } else {
-      firstNameErrorMsg.textContent = "Prénom manquant";
-    }
-  
-    if (lastName.length < 0) {
-  
-    } else {
-      lastNameErrorMsg.textContent = "Nom manquant";
-    }
-  
-    if (address.length < 0) {
-  
-    } else {
-      addressErrorMsg.textContent = "Veullez noter adresse";
-    }
-  
-    if (city.length < 0) {
-  
-    } else {
-      cityErrorMsg.textContent = "Prénom manquant";
-    }
-  
-    if (email.length < 0) {
-  
-    } else {
-      emailErrorMsg.textContent = "Veuillez mentionnez votre adresse mail";
-    }
-  */
-
+  });
 }
