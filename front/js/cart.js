@@ -190,7 +190,7 @@ else {
       var min = 1;
       var max = 99999999999999999;//17 chifre sur la command avoir avec le back-end pour avoir la valleur
       var random = Math.floor(Math.random() * (max - min)) + min;
-      
+
 
       const Command = {
         "firstName": firstName,
