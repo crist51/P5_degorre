@@ -101,12 +101,14 @@ else {
     debutBoucle++
   }
 
+  //--------------les calcul quantité & price
 
+  //--------------------------------quantite
   var debutBoucle = 0
-  let quantityArray = [];//on creer un tableau qui aura les quantité de chaque article
+  let quantityArray = [];
   while (debutBoucle < key.length) {
     console.log(key[debutBoucle].quantity);
-    quantityArray.push(key[debutBoucle].quantity)//on injecte dans le tableau
+    quantityArray.push(key[debutBoucle].quantity)
     debutBoucle++
   }
   console.log(quantityArray);
@@ -116,13 +118,13 @@ else {
 
   totalQuantity.textContent = quantiteTotal
 
-
-  let priceArray = [];//on creer un tableau qui aura les quantité de chaque article
+  //--------------------------------price
+  let priceArray = [];
   var debutBoucle = 0
   while (debutBoucle < key.length) {
     console.log(key[debutBoucle].price);
     var priceTotalArticle = key[debutBoucle].price * quantityArray[debutBoucle]//quantiter * prix
-    priceArray.push(priceTotalArticle)//on injecte dans le tableau
+    priceArray.push(priceTotalArticle)
     debutBoucle++
   }
   console.log(priceArray);
@@ -134,7 +136,7 @@ else {
 
 
 
-  // //-------------------------La gestion de commande
+  //-----------------La gestion de commande
 
 
   //selectionner le btn dans le dom
@@ -144,21 +146,48 @@ else {
   Commander.addEventListener("click", (event) => {
     event.preventDefault();
 
+    ////-----------------condition d'envoi de command
 
     var firstName = document.getElementById("firstName").value
-    console.log(firstName);
 
     var lastName = document.getElementById("lastName").value
-    console.log(lastName);
 
     var address = document.getElementById("address").value
-    console.log(address);
 
     var city = document.getElementById("city").value
-    console.log(city);
 
     var email = document.getElementById("email").value
-    console.log(email);
+
+    //-----------------condition d'envoie de formulaire 
+    var a = 0
+    if ( firstName.length == a || lastName.length == a || address.length == a || city.length == a || email.length == a){
+      console.log("Si a n'a pas asser de caracter, j'affiche les erreur");
+      if (firstName.length == a) {
+        firstNameErrorMsg.textContent = "Prénom manquant";
+
+      } else { }
+
+      if (lastName.length == a) {
+        lastNameErrorMsg.textContent = "Nom manquant";
+
+      } else { }
+
+      if (address.length == a) {
+        addressErrorMsg.textContent = "Veullez noter adresse";
+      } else { }
+
+      if (city.length == a) {
+        cityErrorMsg.textContent = "Veullez indiquer votre ville";
+
+      } else { }
+
+      if (email.length == a) {
+        emailErrorMsg.textContent = "Veuillez mentionner votre adresse mail";
+
+      } else { }
+
+    } else {
+      console.log("sinom j'envoie le form");
 
 
     const Command = {//optionsProduit
@@ -196,36 +225,40 @@ else {
       localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
       popUp();
     }
+    }//else
+  });//btn
 
-  });
 
-  //document.getElementsByTagName("div")[0]
-  if (firstName.length < 0) {
-  } else {
-    firstNameErrorMsg.textContent = "Prénom manquant";
-  }
 
-  if (lastName.length < 0) {
+  /*
+    if (firstName.length < 0) {
+    } else {
+      firstNameErrorMsg.textContent = "Prénom manquant";
+    }
+  
+    if (lastName.length < 0) {
+  
+    } else {
+      lastNameErrorMsg.textContent = "Nom manquant";
+    }
+  
+    if (address.length < 0) {
+  
+    } else {
+      addressErrorMsg.textContent = "Veullez noter adresse";
+    }
+  
+    if (city.length < 0) {
+  
+    } else {
+      cityErrorMsg.textContent = "Prénom manquant";
+    }
+  
+    if (email.length < 0) {
+  
+    } else {
+      emailErrorMsg.textContent = "Veuillez mentionnez votre adresse mail";
+    }
+  */
 
-  } else {
-    lastNameErrorMsg.textContent = "Nom manquant";
-  }
-
-  if (address.length < 0) {
-
-  } else {
-    addressErrorMsg.textContent = "Veullez noter adresse";
-  }
-
-  if (city.length < 0) {
-
-  } else {
-    cityErrorMsg.textContent = "Prénom manquant";
-  }
-
-  if (email.length < 0) {
-
-  } else {
-    emailErrorMsg.textContent = "Veuillez mentionnez votre adresse mail";
-  }
 }

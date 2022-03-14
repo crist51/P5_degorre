@@ -54,20 +54,7 @@ fetch("http://localhost:3000/api/products/" + id)
     //selectionner le btn dans le dom
     const envoyerPanier = document.querySelector("#addToCart")
     console.log(addToCart);
-
-
-
-//-------------------------condition de validation panier
-      
-var zero = 0
-if (quantity == zero ||quantity >100 & colorSelect === "valeurDefaut") {
-  //console.log("Veuillez indiquer une coloris" + "\n" + "Ou" + "\n" + "Veuillez indiquer le nombre de produit souhaité compris \"1\"  et \"100\"");
-  alert("Veuillez indiquer une coloris" + "\n" + "Ou" + "\n" + "Veuillez indiquer le nombre de produit souhaité compris \"1\"  et \"100\"")
-}else{
-
-
-
-
+    
     //écouter le btn et envoyer dans le panier
     envoyerPanier.addEventListener("click", (event) => {
       event.preventDefault();
@@ -75,42 +62,51 @@ if (quantity == zero ||quantity >100 & colorSelect === "valeurDefaut") {
       //-------------------------couleur choisit En Dessous de click event
       var colorSelect = (reponceAPI.colors[colors.value])//color corespond a la select
       console.log(colorSelect);
-      //-------------------------quantité voulut
+
+      //-------------------------quantité voulut // en desous de color
       var quantity = Number(document.getElementById("quantity").value)//rajout Number
       console.log(quantity);
 
-      //-------------------------recuperation des valeur
+      //-------------------------condition de validation panier " voir pour peut etre juste metre un texte d'erreur"
+      var zero = 0
+      if (quantity == zero || quantity > 100 & colorSelect === "valeurDefaut") {
+        //console.log("Veuillez indiquer une coloris" + "\n" + "Ou" + "\n" + "Veuillez indiquer le nombre de produit souhaité compris \"1\"  et \"100\"");
+        alert("Veuillez indiquer une coloris" + "\n" + "Ou" + "\n" + "Veuillez indiquer le nombre de produit souhaité compris \"1\"  et \"100\"")
+      } else {
 
-      const panier = {//optionsProduit
-        "colors": colorSelect,
-        "_id": reponceAPI._id,
-        "name": reponceAPI.name,
-        "price": reponceAPI.price,
-        "imageUrl": reponceAPI.imageUrl,
-        "altTxt": (reponceAPI.altTxt),
-        "quantity": quantity,
-      };
-      console.log(panier);
 
-      //-------------------------local storage
+        //-------------------------recuperation des valeur
 
-      let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+        const panier = {//optionsProduit
+          "colors": colorSelect,
+          "_id": reponceAPI._id,
+          "name": reponceAPI.name,
+          "price": reponceAPI.price,
+          "imageUrl": reponceAPI.imageUrl,
+          "altTxt": (reponceAPI.altTxt),
+          "quantity": quantity,
+        };
+        console.log(panier);
 
-      if (produitEnregistrerDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
-        produitEnregistrerDansLeLocalStorage.push(panier);
-        localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
-        //JSON.stringify convertit le JAVASCRIPT en JSON
-      }
-      else {
-        produitEnregistrerDansLeLocalStorage = [];//sinon on creer  la clef
-        produitEnregistrerDansLeLocalStorage.push(panier)
-        localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
-      }
-    
+        //-------------------------local storage
+
+        let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+
+        if (produitEnregistrerDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
+          produitEnregistrerDansLeLocalStorage.push(panier);
+          localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
+          //JSON.stringify convertit le JAVASCRIPT en JSON
+        }
+        else {
+          produitEnregistrerDansLeLocalStorage = [];//sinon on creer  la clef
+          produitEnregistrerDansLeLocalStorage.push(panier)
+          localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
+        }
+      }//conditon
     })//evenement click btn
 
 
-}//conditon
+
 
 
 

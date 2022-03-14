@@ -3,3 +3,6 @@ Id rajouter sur le html pour img products.html ligne 49
 n'arrive pas a faire fonctionner le p supprimer ligne 82
 
 if a metre
+
+
+    //document.getElementsByTagName("div")[0]
