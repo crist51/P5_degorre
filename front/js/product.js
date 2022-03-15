@@ -94,25 +94,26 @@ fetch("http://localhost:3000/api/products/" + id)
 
         if (produitEnregistrerDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
 
+          let modif = false
+          produitEnregistrerDansLeLocalStorage.forEach(produit => {
+            if (produit._id == panier._id && produit.colors == panier.colors) {
+              if (produit.quantity + panier.quantity <= 100) {
+                produit.quantity += panier.quantity
+              }else{
+                produit.quantity = 100 //limite max
+              }
 
-          produitEnregistrerDansLeLocalStorage.push(panier);
+              modif = true
+            }
+          });
 
+          if (modif == false) {
+            produitEnregistrerDansLeLocalStorage.push(panier);
+
+          }
           console.log(produitEnregistrerDansLeLocalStorage);
           localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
           //JSON.stringify convertit le JAVASCRIPT en JSON
-
-          /*
-           si
-           la couleur du panier est egale a la meme couleur alors on supprime le puch
-           sinom on laisse le push
-                     
-           Donc il faut controler le local storage 
-           
-           il faut faire une boucle afin de controler tout les panier
-           afin de trouver si un _id == _id et colors == colors il faut la derniere ligne de key
-           sinom on push le panier           
-           */
-
 
         }
         else {

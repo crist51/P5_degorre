@@ -88,10 +88,10 @@ else {
     sup.textContent = "Supprimer"
     seeting.appendChild(sup)
 
-    //const a = document.getElementsByClassName(deleteItem);
-    //console.log(Sup);//btn qui pertmet la suppretion
-    console.log(key[debutBoucle]);//objet de boucle a sup
-    //console.log(a);
+    // //const a = document.getElementsByClassName("deleteItem");
+    // //console.log(Sup);//btn qui pertmet la suppretion
+    // console.log(key[debutBoucle]);//objet de boucle a sup
+    // //console.log(a);
 
     // sup.addEventListener("click",(event)=>{
     // event.preventDefault()

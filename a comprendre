@@ -20,6 +20,8 @@ n arrive pas a faire fonctionner le p supprimer ligne 82
 input de cart
 
     atribut onChange
+
+    
     afin de pouvoir chanher l input quantité
         modifiera le prix total et la quantite taotal
 
