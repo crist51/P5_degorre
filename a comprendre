@@ -1,11 +1,55 @@
-Id rajouter sur le html pour img products.html ligne 49
+n arrive pas a faire fonctionner le p supprimer ligne 82
 
-n'arrive pas a faire fonctionner le p supprimer ligne 82
+    Gérer la modification et la suppression des produits dans la page Panier
 
-if a metre
+    Concernant la modification, il va falloir recourir à l événement de
+        modification (addEventListener de type change) pour observer le changement de la quantité.
+        ● Aussi, la méthode Element.closest() devrait permettre de cibler le
+            produit que vous souhaitez supprimer (où dont vous souhaitez modifier la quantité) grâce à son identifiant et sa couleur.
+
+    Attention à bien penser à modifier le DOM, mais aussi localStorage,
+        sinon les modifications effectuées dans le panier ne seront pas
+        conservées en cas de changement de page / de rafraîchissement de
+        la page
+
+        https://developer.mozilla.org/fr/docs/orphaned/Web/API/HTMLOrForeignElement/dataset
+
+
 
 
 input de cart
-    //document.getElementsByTagName("div")[0]
 
     atribut onChange
+    afin de pouvoir chanher l input quantité
+        modifiera le prix total et la quantite taotal
+
+    Dans localStorage, attention de ne pas multiplier inutilement des éléments identiques
+
+Attention de ne pas dupliquer inutilement les éléments dans le
+tableau récapitulatif (le panier). S’il y a plusieurs produits identiques
+
+(même id + même couleur), cela ne doit donner lieu qu’à une seule
+ligne dans le tableau
+
+https://openclassrooms.com/fr/paths/185/projects/675/assignment
+
+
+
+
+
+Formualire 
+    Récupérer et analyser les données saisies par l’utilisateur dans le
+    formulaire.
+
+        ● Afficher un message d’erreur si besoin (par exemple lorsqu’un
+        utilisateur renseigne “bonjour” dans le champ “e-mail”).
+        ● Constituer un objet contact (à partir des données du formulaire) et
+        un tableau de produits.
+
+            https://www.pierre-giraud.com/javascript-apprendre-coder-cours/introduction-expression-reguliere-rationnelle/
+            search google : expressions régulières JavaScript email
+
+        Attention à bien vérifier les données saisies par l’utilisateur.
+        ● Lors de la vérification des données via des regex, attention à bien
+        mener des tests pour vérifier le bon fonctionnement des regex.
+        ● Ne pas oublier d’afficher un message d’erreur si nécessaire.

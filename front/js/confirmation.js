@@ -2,7 +2,11 @@
 let CommandDansLeLocalStorage = JSON.parse(localStorage.getItem("CommandEnregistre"));//JSON.parse pour convertir JSON en JAVASCIPT
 
 
-console.log(CommandDansLeLocalStorage);
-console.log(CommandDansLeLocalStorage[2].idCommand);
+//-----------------construction de nombre aléatoire
+var min = 1;
+var max = 99999999999999999;
+var random = Math.floor(Math.random() * (max - min)) + min;
 
-orderId.textContent = (CommandDansLeLocalStorage[2].idCommand)
+console.log(CommandDansLeLocalStorage);
+
+orderId.textContent = (random)

@@ -27,8 +27,9 @@ fetch("http://localhost:3000/api/products/" + id)
     kanapImg.src = (reponceAPI.imageUrl);
     kanapImg.alt = (reponceAPI.altTxt);
     kanapImg.classList.add("item__img");
-    item__img.appendChild(kanapImg);
-
+    const articleIMG = document.querySelector(".item__img")
+    articleIMG.appendChild(kanapImg)
+    console.log(articleIMG);
 
     //--------------création title & price & description
     title.textContent = (reponceAPI.name);
@@ -55,7 +56,7 @@ fetch("http://localhost:3000/api/products/" + id)
     //selectionner le btn dans le dom
     const envoyerPanier = document.querySelector("#addToCart")
     console.log(addToCart);
-    
+
     //écouter le btn et envoyer dans le panier
     envoyerPanier.addEventListener("click", (event) => {
       event.preventDefault();
@@ -85,16 +86,32 @@ fetch("http://localhost:3000/api/products/" + id)
           "altTxt": (reponceAPI.altTxt),
           "quantity": quantity,
         };
-        console.log(panier);
+        console.log(panier);//panier enregistre
 
         //-------------------------local storage
 
         let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
 
         if (produitEnregistrerDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
+
+
           produitEnregistrerDansLeLocalStorage.push(panier);
           localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
           //JSON.stringify convertit le JAVASCRIPT en JSON
+
+          /*
+           si
+           la couleur du panier est egale a la meme couleur alors on supprime le puch
+           sinom on laisse le push
+                     
+           Donc il faut controler le local storage 
+           
+           il faut faire une boucle afin de controler tout les panier
+           afin de trouver si un _id == _id et colors == colors il faut la derniere ligne de key
+           sinom on push le panier           
+           */
+
+
         }
         else {
           produitEnregistrerDansLeLocalStorage = [];//sinon on creer  la clef
@@ -102,11 +119,6 @@ fetch("http://localhost:3000/api/products/" + id)
           localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
         }
       }//conditon
-    })//evenement click btn
-
-
-
-
-
+    })//evenement click bt
 
   });//fetch

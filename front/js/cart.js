@@ -9,7 +9,7 @@ var key = produitEnregistrerDansLeLocalStorage
 //---------------boucle de construction
 var debutBoucle = 0
 
-if (key == null) {
+if (key == null) { //panier vude
   var article = document.createElement("article");
   article.classList.add("cart__item")
   cart__items.appendChild(article);
@@ -159,6 +159,8 @@ else {
     if (firstName.length == a || lastName.length == a || address.length == a || city.length == a || email.length == a) {
       //Si il y a n'a pas asser de caracter, j'affiche les erreur sur les endroit concerné
       if (firstName.length == a) {
+
+        //-----------------//-----------------message erreur
         firstNameErrorMsg.textContent = "Prénom manquant";
 
       } else { }
@@ -186,12 +188,7 @@ else {
       //Sinom j'envoie le form
 
 
-      //-----------------construction de nombre aléatoire
-      var min = 1;
-      var max = 99999999999999999;//17 chifre sur la command avoir avec le back-end pour avoir la valleur
-      var random = Math.floor(Math.random() * (max - min)) + min;
-
-
+      //-----------------commande
       const Command = {
         "firstName": firstName,
         "lastName": lastName,
@@ -200,7 +197,6 @@ else {
         "city": city,
         "email": email,
         "panier": produitEnregistrerDansLeLocalStorage,
-        "idCommand": random,
       };
       console.log(Command);
 
