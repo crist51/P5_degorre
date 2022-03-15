@@ -96,6 +96,8 @@ fetch("http://localhost:3000/api/products/" + id)
 
 
           produitEnregistrerDansLeLocalStorage.push(panier);
+
+          console.log(produitEnregistrerDansLeLocalStorage);
           localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
           //JSON.stringify convertit le JAVASCRIPT en JSON
 
