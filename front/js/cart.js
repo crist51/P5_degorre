@@ -6,7 +6,7 @@ console.log();
 
 var key = produitEnregistrerDansLeLocalStorage
 
-//---------------boucle de construction
+//********************************************************************boucle de construction********************************************************************
 var debutBoucle = 0
 
 if (key == null) { //panier vude
@@ -23,7 +23,7 @@ else {
     article.classList.add("cart__item")
     cart__items.appendChild(article);
 
-    //création div [img]
+    //--------------------------------création div [img]
     var cart__item__img
       = document.createElement("div")
     cart__item__img.classList.add("cart__item__img")
@@ -34,7 +34,7 @@ else {
     image.alt = (key[debutBoucle].altTxt)
     cart__item__img.appendChild(image)
 
-    //partit1 création div [non],[option],[price],
+    //-------------------------------- création div = cart__item__content__description [non],[colors],[price],
     var cart__item__content = document.createElement("div")
     cart__item__content.classList.add("cart__item__content")
     article.appendChild(cart__item__content)
@@ -55,12 +55,12 @@ else {
     price.textContent = (key[debutBoucle].price)
     cart__item__content__description.appendChild(price)
 
-    //--------------partit2 quantité
+    //--------------------------------création div = cart__item__content__settings [quantity][delete]
     var cart__item__content__seetings = document.createElement("div")
     cart__item__content__seetings.classList.add("cart__item__content__settings")
     cart__item__content.appendChild(cart__item__content__seetings)
 
-    //--------------quantité
+    //----------------------------------------------------------------création div = cart__item__content__settings__quantity [quantity]
     var description = document.createElement("div")
     description.classList.add("cart__item__content__settings__quantity")
     cart__item__content__seetings.appendChild(description)
@@ -78,7 +78,7 @@ else {
     quantite.classList.add("itemQuantity")
     description.appendChild(quantite)
 
-    //--------------supprimer
+    //----------------------------------------------------------------création div = cart__item__content__settings__delete[delete]
     var seeting = document.createElement("div")
     seeting.classList.add("cart__item__content__settings__delete")
     cart__item__content__seetings.appendChild(seeting)
@@ -88,30 +88,34 @@ else {
     sup.textContent = "Supprimer"
     seeting.appendChild(sup)
 
-    // //const a = document.getElementsByClassName("deleteItem");
-    // //console.log(Sup);//btn qui pertmet la suppretion
-    // console.log(key[debutBoucle]);//objet de boucle a sup
-    // //console.log(a);
-
+    console.log(sup);
     // sup.addEventListener("click",(event)=>{
     // event.preventDefault()
-    // delete key[debutBoucle]//a la place de "."[] peut etre
-    // });
+    // delete key[debutBoucle] && produitEnregistrerDansLeLocalStorage[debutBoucle]//a la place de "."[] peut etre
+    //});
 
     debutBoucle++
   }
+  //   var t = 0
+  //   while (t < key.length) {
+  //     key[t].sup.addEventListener("click",(event)=>{
+  //       event.preventDefault()
+  //       delete key[debutBoucle] && produitEnregistrerDansLeLocalStorage[debutBoucle]
+  //     console.log(t);
+  //     t++;
+  //   })
+  // }
 
-  //--------------les calcul quantité & price
+
+  //********************************************************************les calcul quantité & price********************************************************************
 
   //--------------------------------quantite
   var debutBoucle = 0
   let quantityArray = [];
   while (debutBoucle < key.length) {
-    console.log(key[debutBoucle].quantity);
     quantityArray.push(key[debutBoucle].quantity)
     debutBoucle++
   }
-  console.log(quantityArray);
 
   var reducer = (accumulator, curenceValue) => accumulator + curenceValue
   const quantiteTotal = quantityArray.reduce(reducer);
@@ -122,28 +126,153 @@ else {
   let priceArray = [];
   var debutBoucle = 0
   while (debutBoucle < key.length) {
-    console.log(key[debutBoucle].price);
     var priceTotalArticle = key[debutBoucle].price * quantityArray[debutBoucle]//quantiter * prix
     priceArray.push(priceTotalArticle)
     debutBoucle++
   }
-  console.log(priceArray);
   var reducerPrice = (accumulator, curenceValue) => accumulator + curenceValue
   const priceTotal = priceArray.reduce(reducerPrice);
 
   totalPrice.textContent = priceTotal
-  console.log(priceTotal);
 
-  //-----------------La gestion de commande
+
+
+  //********************************************************************reg Exp********************************************************************
+  
+  //--------------------------------rexExp firstName
+  let firstName = document.getElementById("firstName")//formPasword
+  console.log(firstName);
+  firstName.addEventListener("change", function () {
+    validFirstName(this);
+  })
+  const validFirstName = function (firstName) {//validPaswor
+    let testFirsName = false
+    //commencez avec une maj
+    if (!/^[A-Z]/.test(firstName.value)) {//! si il n'y as pas c'est faux
+      firstNameErrorMsg.textContent = "Commencez avec une majuscule"
+    }
+    //au mois 3 caractere
+    else if (firstName.value.length < 2) {//inputPasword
+      firstNameErrorMsg.textContent = "Pas assez de caratere"
+    }
+    //au moins une minuscule
+    else if (!/[a-z]/.test(firstName.value)) {//! si il n'y as pas c'est faux
+      firstNameErrorMsg.textContent = "Il manque une minuscule"
+    }
+    else if(firstName.value.length > 45)
+    firstNameErrorMsg.textContent = "Il y a trop de caractere"
+    //mdp valide
+    else {
+      firstNameErrorMsg.textContent = "Prenom valide"
+      testFirsName = true
+    }
+    console.log(testFirsName);
+  }
+  
+  //--------------------------------rexExp lastName
+  let lastName = document.getElementById("lastName")//formPasword
+  console.log(lastName);
+  lastName.addEventListener("change", function () {
+    validlastName(this);
+  })
+  const validlastName = function (lastName) {//validPaswor
+    let testlastName = false
+    //commencez avec une maj
+    if (!/^[A-Z]/.test(lastName.value)) {//! si il n'y as pas c'est faux
+      lastNameErrorMsg.textContent = "Commencez avec une majuscule"
+    }
+    //au mois 3 caractere
+    else if (lastName.value.length < 2) {//inputPasword
+      lastNameErrorMsg.textContent = "Pas assez de caratere"
+    }
+    //au moins une minuscule
+    else if (!/[a-z]/.test(lastName.value)) {//! si il n'y as pas c'est faux
+      lastNameErrorMsg.textContent = "Il manque une minuscule"
+    }
+    else if(lastName.value.length > 45)
+    lastNameErrorMsg.textContent = "Il y a trop de caractere"
+    //mdp valide
+    else {
+      lastNameErrorMsg.textContent = "Nom valide"
+      testlastName = true
+    }
+    console.log(testlastName);
+  }
+
+  //--------------------------------rexExp adresse
+  let address = document.getElementById("address")//formPasword
+  console.log(address);
+  address.addEventListener("change", function () {
+    validaddress(this);
+  })
+  const validaddress = function (address) {//validPaswor
+    let testAddress = false
+    //commencez avec une maj
+    //au mois 3 caractere
+    if (address.value.length < 2) {//inputPasword
+      addressErrorMsg.textContent = "Pas assez de caratere"
+    }
+    //au moins une minuscule
+    else if (!/[a-z]/.test(address.value)) {//! si il n'y as pas c'est faux
+      addressErrorMsg.textContent = "Il manque une minuscule"
+    }
+    else if(address.value.length > 45)
+    addressErrorMsg.textContent = "Il y a trop de caractere"
+    //mdp valide
+    else {
+      addressErrorMsg.textContent = "Adresse valide"
+      testAddress = true
+    }
+    console.log(testAddress);
+  }
+  //--------------------------------rexExp email
+  let email = document.getElementById("email")
+  console.log(email);
+  //ecouter la modif de first name
+  email.addEventListener("change", function () {
+    validEmail(this)
+  })
+  const validEmail = function (inputEmail) {
+    //création regExp  E-mail
+    let emailRegExp = new RegExp(
+      "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$",
+      "g"
+      //  ^[] au début on doit commencer a → z ou A → Z ou 0 →9 ou on oeut metre des . - _ et le  + signifit que l'on peut les utiliser plusieur fois
+      //  [@]{1} un doit avoir un @ 1 fois
+      //$ fin de la RegEX (expression reguliere)
+    )
+
+    //--------------------------------affichage si pb mail
+    let testEmail = emailRegExp.test(inputEmail.value)
+    console.log(testEmail);
+
+    if (testEmail == true) {
+      emailErrorMsg.textContent = "Adresse Mail Valide";
+    }
+    // else {
+    //   emailErrorMsg.textContent = "Adresse Mail Non Valide"
+    // }
+  }
+
+
+
+
+
+
+
+
+
+
+
+  ////********************************************************************La gestion de commande//********************************************************************
 
   //selectionner le btn dans le dom
   const Commander = document.querySelector("#order")
-  console.log(order);
   //écouter le btn et envoyer dans le panier
   Commander.addEventListener("click", (event) => {
     event.preventDefault();
 
-    //-----------------gestion d'input sur les form
+    //--------------------------------gestion d'input sur les form
     var firstName = document.getElementById("firstName").value
 
     var lastName = document.getElementById("lastName").value
@@ -154,13 +283,15 @@ else {
 
     var email = document.getElementById("email").value
 
-    //-----------------condition d'envoie de formulaire 
+    //--------------------------------condition d'envoie de formulaire 
+
+
     var a = 0
     if (firstName.length == a || lastName.length == a || address.length == a || city.length == a || email.length == a) {
       //Si il y a n'a pas asser de caracter, j'affiche les erreur sur les endroit concerné
       if (firstName.length == a) {
 
-        //-----------------//-----------------message erreur
+        //--------------------------------message erreur
         firstNameErrorMsg.textContent = "Prénom manquant";
 
       } else { }
@@ -178,17 +309,11 @@ else {
         cityErrorMsg.textContent = "Veullez indiquer votre ville";
 
       } else { }
-
-      if (email.length == a) {
-        emailErrorMsg.textContent = "Veuillez mentionner votre adresse mail";
-
-      } else { }
-
     } else {
       //Sinom j'envoie le form
 
 
-      //-----------------commande
+      //--------------------------------commande
       const Command = {
         "firstName": firstName,
         "lastName": lastName,
@@ -200,12 +325,11 @@ else {
       };
       console.log(Command);
 
-      //-------------------------local storage
+      ////********************************************************************local storage//********************************************************************
 
       let CommandDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
 
-      //pop-UP de validation
-      // 
+      //--------------------------------pop-UP de validation
       const popUp = () => {
         if (window.confirm((firstName) + (lastName) + "\n" + "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" + "ou pour l\'annuler cliquée sur \"annuler\""))
           window.location.href = "http://127.0.0.1:5500/front/html/confirmation.html";//----A MODIFIER
@@ -223,5 +347,7 @@ else {
         popUp();
       }
     }
+
+
   });
 }
