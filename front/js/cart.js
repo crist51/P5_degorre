@@ -88,32 +88,35 @@ else {
     sup.textContent = "Supprimer"
     seeting.appendChild(sup)
 
-    console.log(sup);
-    // sup.addEventListener("click",(event)=>{
-    // event.preventDefault()
-    // delete key[debutBoucle] && produitEnregistrerDansLeLocalStorage[debutBoucle]//a la place de "."[] peut etre
-    //});
 
     debutBoucle++
   }
-  //   var t = 0
-  //   while (t < key.length) {
-  //     key[t].sup.addEventListener("click",(event)=>{
-  //       event.preventDefault()
-  //       delete key[debutBoucle] && produitEnregistrerDansLeLocalStorage[debutBoucle]
-  //     console.log(t);
-  //     t++;
+
+  // var p = 0
+  // console.log(p);
+  // console.log(key.length);
+  // while (p < key.length) {
+  //   var btn_sup = document.querySelector(".deleteItem")
+  //   btn_sup.addEventListener("click", (event) => {
+  //     event.preventDefault()
+  //     key.splice(p)
+  //     console.log(key[p]);
+  //     produitEnregistrerDansLeLocalStorage.splice(p)
+  //     console.log(produitEnregistrerDansLeLocalStorage[p]);
   //   })
+  //   p++
   // }
+
+  console.log(key[1]);
 
 
   //********************************************************************les calcul quantité & price********************************************************************
 
-  //--------------------------------quantite
+  //--------------------------------quantity
   var debutBoucle = 0
   let quantityArray = [];
   while (debutBoucle < key.length) {
-    quantityArray.push(key[debutBoucle].quantity)
+    quantityArray.push(/*key[debutBoucle].quantity*/quantite.value)
     debutBoucle++
   }
 
@@ -136,12 +139,10 @@ else {
   totalPrice.textContent = priceTotal
 
 
-
   //********************************************************************reg Exp********************************************************************
 
   //--------------------------------rexExp firstName
   let firstName = document.getElementById("firstName")
-  console.log(firstName);
   firstName.addEventListener("change", function () {
     validFirstName(this);
   })
@@ -175,7 +176,6 @@ else {
 
   //--------------------------------rexExp lastName
   let lastName = document.getElementById("lastName")
-  console.log(lastName);
   lastName.addEventListener("change", function () {
     validLastName(this);
   })
@@ -209,7 +209,6 @@ else {
 
   //--------------------------------rexExp address
   let address = document.getElementById("address")
-  console.log(address);
   address.addEventListener("change", function () {
     validAddress(this);
   })
@@ -239,7 +238,6 @@ else {
 
   //--------------------------------rexExp city
   let city = document.getElementById("city")
-  console.log(city);
   city.addEventListener("change", function () {
     validCity(this);
   })
@@ -273,7 +271,6 @@ else {
 
   //--------------------------------rexExp email
   let email = document.getElementById("email")
-  console.log(email);
   email.addEventListener("change", function () {
     validEmail(this)
   })
@@ -323,7 +320,7 @@ else {
     console.log(validLastName(lastName));
     console.log(validFirstName(firstName));
 
-    if ( validEmail(email) && validCity(city) && validAddress(address) && validLastName(lastName) && validFirstName(firstName) == true ) {
+    if (validEmail(email) && validCity(city) && validAddress(address) && validLastName(lastName) && validFirstName(firstName) == true) {
 
 
 

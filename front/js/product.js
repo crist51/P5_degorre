@@ -49,6 +49,7 @@ fetch("http://localhost:3000/api/products/" + id)
       colors.appendChild(colorOption);//On ajoute option dans le HTML;
       color++;
     }
+    //-----------------------------quantity
     var inputQuantity = document.getElementById("quantity")
     inputQuantity.value = 0
     //-------------------------La gestion du panier
