@@ -159,8 +159,9 @@ else {
     else if (!/[a-z]/.test(firstName.value)) {
       firstNameErrorMsg.textContent = "Il manque une minuscule"
     }
-    else if (firstName.value.length > 45)
+    else if (firstName.value.length > 45){
       firstNameErrorMsg.textContent = "Il y a trop de caractere"
+    }
     //mdp valide
     else {
       firstNameErrorMsg.textContent = "Prenom valide"
@@ -168,6 +169,7 @@ else {
     }
     console.log(testFirsName);
   }
+
   //--------------------------------rexExp lastName
   let lastName = document.getElementById("lastName")
   console.log(lastName);
@@ -199,7 +201,7 @@ else {
   }
 
   //--------------------------------rexExp address
-  let address = document.getElementById("address") /
+  let address = document.getElementById("address")
     console.log(address);
   address.addEventListener("change", function () {
     validAddress(this);
@@ -236,7 +238,7 @@ else {
     //commencez avec une maj
     //au mois 3 caractere
     if (!/^[A-Z]/.test(lastName.value)) {
-      lastNameErrorMsg.textContent = "Commencez avec une majuscule"
+      cityErrorMsg.textContent = "Commencez avec une majuscule"
     }
     else if (city.value.length < 2) {//inputPasword
       cityErrorMsg.textContent = "Pas assez de caratere"
@@ -277,15 +279,17 @@ else {
 
     if (testEmail == true) {
       emailErrorMsg.textContent = "Adresse Mail Valide";
+    return true
     }
-    // else {
-    //   emailErrorMsg.textContent = "Adresse Mail Non Valide"
-    // }
+    else {
+    emailErrorMsg.textContent = "Adresse Mail Non Valide"
+    return false
+    }
   }
 
 
 
-
+console.log(validEmail(email));
 
 
 
@@ -380,3 +384,17 @@ else {
 
   });
 }
+
+
+
+var form = document.querySelector(".cart__order__form")
+console.log(form);
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  if (validEmail(email)){
+    console.log("valid");
+  }
+    else{
+      console.log("non valide");
+    }
+})
