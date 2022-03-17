@@ -150,24 +150,28 @@ else {
     //commencez avec une maj
     if (!/^[A-Z]/.test(firstName.value)) {//! si il n'y as pas c'est faux & debut
       firstNameErrorMsg.textContent = "Commencez avec une majuscule"
+      return false
     }
     //au mois 3 caractere
     else if (firstName.value.length < 2) {
       firstNameErrorMsg.textContent = "Pas assez de caratere"
+      return false
     }
     //au moins une minuscule
     else if (!/[a-z]/.test(firstName.value)) {
       firstNameErrorMsg.textContent = "Il manque une minuscule"
+      return false
     }
-    else if (firstName.value.length > 45){
+    else if (firstName.value.length > 45) {
       firstNameErrorMsg.textContent = "Il y a trop de caractere"
+      return false
     }
-    //mdp valide
+    //firstName valide
     else {
       firstNameErrorMsg.textContent = "Prenom valide"
       testFirsName = true
+      return true
     }
-    console.log(testFirsName);
   }
 
   //--------------------------------rexExp lastName
@@ -181,28 +185,33 @@ else {
     //commencez avec une maj
     if (!/^[A-Z]/.test(lastName.value)) {
       lastNameErrorMsg.textContent = "Commencez avec une majuscule"
+      return false
     }
     //au mois 3 caractere
     else if (lastName.value.length < 2) {//inputPasword
       lastNameErrorMsg.textContent = "Pas assez de caratere"
+      return false
     }
     //au moins une minuscule
     else if (!/[a-z]/.test(lastName.value)) {
       lastNameErrorMsg.textContent = "Il manque une minuscule"
+      return false
     }
-    else if (lastName.value.length > 45)
+    else if (lastName.value.length > 45) {
       lastNameErrorMsg.textContent = "Il y a trop de caractere"
-    //mdp valide
+      return false
+      //lastName valide
+    }
     else {
       lastNameErrorMsg.textContent = "Nom valide"
       testlastName = true
+      return true
     }
-    console.log(testlastName);
   }
 
   //--------------------------------rexExp address
   let address = document.getElementById("address")
-    console.log(address);
+  console.log(address);
   address.addEventListener("change", function () {
     validAddress(this);
   })
@@ -212,49 +221,58 @@ else {
     //au mois 3 caractere
     if (address.value.length < 2) {
       addressErrorMsg.textContent = "Pas assez de caratere"
+      return false
     }
     //au moins une minuscule
     else if (!/[a-z]/.test(address.value)) {
       addressErrorMsg.textContent = "Il manque une minuscule"
+      return false
     }
-    else if (address.value.length > 45)
+    else if (address.value.length > 45) {
       addressErrorMsg.textContent = "Il y a trop de caractere"
+      return false
+    }
     //mdp valide
     else {
       addressErrorMsg.textContent = "Adresse valide"
       testAddress = true
+      return true
     }
-    console.log(testAddress);
   }
 
   //--------------------------------rexExp city
   let city = document.getElementById("city")
   console.log(city);
   city.addEventListener("change", function () {
-    validcity(this);
+    validCity(this);
   })
-  const validcity = function (city) {
+  const validCity = function (city) {
     let testCity = false
     //commencez avec une maj
-    //au mois 3 caractere
     if (!/^[A-Z]/.test(lastName.value)) {
       cityErrorMsg.textContent = "Commencez avec une majuscule"
+      return false
     }
     else if (city.value.length < 2) {//inputPasword
       cityErrorMsg.textContent = "Pas assez de caratere"
+      return false
     }
     //au moins une minuscule
     else if (!/[a-z]/.test(city.value)) {
       cityErrorMsg.textContent = "Il manque une minuscule"
+      return false
     }
-    else if (city.value.length > 45)
+    //nombre dee caractere limit
+    else if (city.value.length > 45) {
       cityErrorMsg.textContent = "Il y a trop de caractere"
-    //mdp valide
+      return false
+    }
+    //city valide
     else {
       cityErrorMsg.textContent = "ville valide"
       testCity = true
+      return true
     }
-    console.log(testCity);
   }
 
   //--------------------------------rexExp email
@@ -267,7 +285,7 @@ else {
     //création regExp  E-mail
     let emailRegExp = new RegExp(
       "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$",
-      "g"
+      //"g"
       //  ^[] au début on doit commencer a → z ou A → Z ou 0 →9 ou on oeut metre des . - _ et le  + signifit que l'on peut les utiliser plusieur fois
       //  [@]{1} un doit avoir un @ 1 fois
       //$ fin de la RegEX (expression reguliere)
@@ -275,21 +293,18 @@ else {
 
     //--------------------------------affichage si pb mail
     let testEmail = emailRegExp.test(inputEmail.value)
-    console.log(testEmail);
+    //console.log(testEmail);
 
     if (testEmail == true) {
       emailErrorMsg.textContent = "Adresse Mail Valide";
-    return true
+      return true
     }
     else {
-    emailErrorMsg.textContent = "Adresse Mail Non Valide"
-    return false
+      emailErrorMsg.textContent = "Adresse Mail Non Valide"
+      return false
     }
   }
-
-
-
-console.log(validEmail(email));
+    ;
 
 
 
@@ -300,101 +315,71 @@ console.log(validEmail(email));
   const Commander = document.querySelector("#order")
   //écouter le btn et envoyer dans le panier
   Commander.addEventListener("click", (event) => {
-  event.preventDefault();
- 
+    event.preventDefault();
 
-
-
-    //--------------------------------gestion d'input sur les form
-    // var firstName = document.getElementById("firstName").value
-
-    // var lastName = document.getElementById("lastName").value
-
-    // var address = document.getElementById("address").value
-
-    // var city = document.getElementById("city").value
-
-    // var email = document.getElementById("email").value
 
     //--------------------------------condition d'envoie de formulaire 
 
-    /*
-        var a = 0
-        if (testFirsName && testLastName && testAddress && testCity && testEmail == true/*firstName.length == a || lastName.length == a || address.length == a || city.length == a || email.length == /) {
-          //Si il y a n'a pas asser de caracter, j'affiche les erreur sur les endroit concerné
-          if (firstName.length == a) {
-    
-            //--------------------------------message erreur
-            firstNameErrorMsg.textContent = "Prénom manquant";
-    
-          } else { }
-    
-          if (lastName.length == a) {
-            lastNameErrorMsg.textContent = "Nom manquant";
-    
-          } else { }
-    
-          if (address.length == a) {
-            addressErrorMsg.textContent = "Veullez noter adresse";
-          } else { }
-    
-          if (city.length == a) {
-            cityErrorMsg.textContent = "Veullez indiquer votre ville";
-    
-          } else { }
-        } else {
-          //Sinom j'envoie le form
-    */
 
-    //--------------------------------commande
-    const Command = {
-      "firstName": firstName,
-      "lastName": lastName,
-      "address": address,
-      "price": city,
-      "city": city,
-      "email": email,
-      //"panier": produitEnregistrerDansLeLocalStorage,
-    };
-    console.log(Command);
 
-    ////********************************************************************local storage//********************************************************************
+    console.log(validEmail(email))
+    console.log(validCity(city));
+    console.log(validAddress(address));
+    console.log(validLastName(lastName));
+    console.log(validFirstName(firstName));
 
-    let CommandDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+    if ( validEmail(email) && validCity(city) && validAddress(address) && validLastName(lastName) && validFirstName(firstName) == true ) {
 
-    //--------------------------------pop-UP de validation
-    const popUp = () => {
-      if (window.confirm((firstName) + (lastName) + "\n" + "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" + "ou pour l\'annuler cliquée sur \"annuler\""))
-        window.location.href = "http://127.0.0.1:5500/front/html/confirmation.html";//----A MODIFIER
+
+
+      //--------------------------------commande
+      const Command = {
+        "firstName": firstName,
+        "lastName": lastName,
+        "address": address,
+        "price": city,
+        "city": city,
+        "email": email,
+        //"panier": produitEnregistrerDansLeLocalStorage,
+      };
+      console.log(Command);
+
+      ////********************************************************************local storage//********************************************************************
+
+      let CommandDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+
+      //--------------------------------pop-UP de validation
+      const popUp = () => {
+        if (window.confirm((firstName) + (lastName) + "\n" + "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" + "ou pour l\'annuler cliquée sur \"annuler\""))
+          window.location.href = "http://127.0.0.1:5500/front/html/confirmation.html";//----A MODIFIER
+      }
+
+      if (CommandDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
+        CommandDansLeLocalStorage.push(Command);
+        localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
+        popUp();
+      }
+      else {
+        CommandDansLeLocalStorage = [];//sinon on creer  le tableau vide
+        CommandDansLeLocalStorage.replace(Command)//on creer la clef
+        localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
+        popUp();
+      }
     }
-
-    if (CommandDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
-      CommandDansLeLocalStorage.push(Command);
-      localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
-      popUp();
-    }
-    else {
-      CommandDansLeLocalStorage = [];//sinon on creer  le tableau vide
-      CommandDansLeLocalStorage.replace(Command)//on creer la clef
-      localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
-      popUp();
-    }
-    //}
-
 
   });
 }
 
 
 
-var form = document.querySelector(".cart__order__form")
-console.log(form);
-form.addEventListener('submit', function(e){
-  e.preventDefault();
-  if (validEmail(email)){
-    console.log("valid");
-  }
-    else{
-      console.log("non valide");
-    }
-})
+// var form = document.querySelector(".cart__order__form")
+// console.log(form);
+// form.addEventListener('submit', function(e){
+//   e.preventDefault();
+//   if (validEmail(email)){
+//     console.log("valid");
+//   }
+//     else{
+//       console.log("non valide");
+//     }
+// })
