@@ -168,7 +168,6 @@ else {
     }
     //firstName valide
     else {
-      firstNameErrorMsg.textContent = "Prenom valide"
       testFirsName = true
       return true
     }
@@ -203,7 +202,6 @@ else {
       //lastName valide
     }
     else {
-      lastNameErrorMsg.textContent = "Nom valide"
       testlastName = true
       return true
     }
@@ -234,7 +232,6 @@ else {
     }
     //mdp valide
     else {
-      addressErrorMsg.textContent = "Adresse valide"
       testAddress = true
       return true
     }
@@ -269,7 +266,6 @@ else {
     }
     //city valide
     else {
-      cityErrorMsg.textContent = "ville valide"
       testCity = true
       return true
     }
@@ -296,7 +292,6 @@ else {
     //console.log(testEmail);
 
     if (testEmail == true) {
-      emailErrorMsg.textContent = "Adresse Mail Valide";
       return true
     }
     else {
@@ -334,13 +329,13 @@ else {
 
       //--------------------------------commande
       const Command = {
-        "firstName": firstName,
-        "lastName": lastName,
-        "address": address,
-        "price": city,
-        "city": city,
-        "email": email,
-        //"panier": produitEnregistrerDansLeLocalStorage,
+        "firstName": firstName.value,
+        "lastName": lastName.value,
+        "address": address.value,
+        "price": city.value,
+        "city": city.value,
+        "email": email.value,
+        "panier": produitEnregistrerDansLeLocalStorage,
       };
       console.log(Command);
 
@@ -350,7 +345,7 @@ else {
 
       //--------------------------------pop-UP de validation
       const popUp = () => {
-        if (window.confirm((firstName) + (lastName) + "\n" + "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" + "ou pour l\'annuler cliquée sur \"annuler\""))
+        if (window.confirm((lastName.value) + " " + (firstName.value) + "\n" + "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" + "ou pour l\'annuler cliquée sur \"annuler\""))
           window.location.href = "http://127.0.0.1:5500/front/html/confirmation.html";//----A MODIFIER
       }
 
@@ -369,17 +364,3 @@ else {
 
   });
 }
-
-
-
-// var form = document.querySelector(".cart__order__form")
-// console.log(form);
-// form.addEventListener('submit', function(e){
-//   e.preventDefault();
-//   if (validEmail(email)){
-//     console.log("valid");
-//   }
-//     else{
-//       console.log("non valide");
-//     }
-// })
