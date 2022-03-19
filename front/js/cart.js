@@ -91,6 +91,8 @@ else {
     sup.textContent = "Supprimer"
     seeting.appendChild(sup)
 
+
+
     debutBoucle++
   }
 }
@@ -121,26 +123,83 @@ else {
 // var qte = m.closest(1)
 // console.log(qte);
 //Element.closest()
+
 //********************************************************************btn sup********************************************************************
 
-  // var p = 0
-  // console.log(p);
-  // console.log(key.length);
-  // while (p < key.length) {
-  //   var btn_sup = document.querySelector(".deleteItem")
-  //   btn_sup.addEventListener("click", (event) => {
-  //     event.preventDefault()
-  //     key.splice(p)
-  //     console.log(key[p]);
-  //     produitEnregistrerDansLeLocalStorage.splice(p)
-  //     console.log(produitEnregistrerDansLeLocalStorage[p]);
-  //   })
-  //   p++
-  // }
-  
+
+
+const listIeleteItem = document.getElementsByClassName('deleteItem');
+console.log(listIeleteItem);
+
+listIeleteItem[0].addEventListener("click", (event => {
+  event.preventDefault;
+  var el = listIeleteItem[0].closest("article")//selectionnne l'article le plus proche
+  console.log(produitEnregistrerDansLeLocalStorage[0]);
+  console.log(el);
+}))
+listIeleteItem[1].addEventListener("click", (event => {
+  event.preventDefault;
+  var el = listIeleteItem[1].closest("article")//selectionnne l'article le plus proche
+  console.log(produitEnregistrerDansLeLocalStorage[1]);
+  console.log(el);
+}))
+listIeleteItem[2].addEventListener("click", (event => {
+  event.preventDefault;
+  var el = listIeleteItem[2].closest("article")//selectionnne l'article le plus proche
+  console.log(produitEnregistrerDansLeLocalStorage[2]);
+  console.log(el);
+}))
+  //delete el;
+  //localStorage.removeItem(key)
+  // localStorage.removeItem("key")//supretion de la key
+  // window.location.href = "http://127.0.0.1:5500/front/html/cart.html"//recharge la page
+
+console.log(localStorage);
+// var debutBoucle = 0
+// console.log(debutBoucle);
+// while (debutBoucle < key.length) {
+//   listIeleteItem[debutBoucle].addEventListener("click", (event => {
+//     event.preventDefault;
+//     console.log( debutBoucle +' zeae');
+
+//   }))
+//   debutBoucle++
+// }
+
+
+//var elt = element.closest(selecteurs);
+
+
+// console.log(listBtn_sup[1]);
+//var btn_sup = document.querySelector(".deleteItem")
+//console.log(btn_sup);
+
+
+// var m = 0
+// while (m < key.length) {
+//   listBtn_sup[m].addEventListener("click", (event => {
+//     event.preventDefault;
+//     console.log('zeae');
+// var el = btn_sup.closest("article")//selectionnne l'article le plus proche
+//console.log(el);
+//console.log(produitEnregistrerDansLeLocalStorage[debutBoucle]);
+//localStorage.removeItem("key");//supretion de la key
+//window.location.href = "http://127.0.0.1:5500/front/html/cart.html"//recharge la page
+//   }))
+//   m++
+// }
 
 
 
+
+
+//var btn_sup = document.querySelector(".deleteItem")
+//btn_sup.addEventListener("click", (event => {
+//event.preventDefault;
+//var el = btn_sup.closest("article")//selectionnne l'article le plus proche
+//console.log(el);
+
+//}))
 
 
 //********************************************************************les calcul quantité & price********************************************************************
@@ -149,10 +208,14 @@ else {
 var debutBoucle = 0
 let quantityArray = [];
 while (debutBoucle < key.length) {
-  quantityArray.push(/*key[debutBoucle].quantity*/quantite.value)
+
+  //modif a apporter
+  quantityArray.push(key[debutBoucle].quantity)
+
+
   debutBoucle++
 }
-
+console.log(quantityArray);
 var reducer = (accumulator, curenceValue) => accumulator + curenceValue
 const quantiteTotal = quantityArray.reduce(reducer);
 
@@ -166,6 +229,7 @@ while (debutBoucle < key.length) {
   priceArray.push(priceTotalArticle)
   debutBoucle++
 }
+console.log(priceArray);
 var reducerPrice = (accumulator, curenceValue) => accumulator + curenceValue
 const priceTotal = priceArray.reduce(reducerPrice);
 

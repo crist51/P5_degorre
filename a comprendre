@@ -37,25 +37,4 @@ https://openclassrooms.com/fr/paths/185/projects/675/assignment
 
 
 
-
-
-Formualire 
-    Récupérer et analyser les données saisies par l’utilisateur dans le
-    formulaire.
-
-        ● Afficher un message d’erreur si besoin (par exemple lorsqu’un
-        utilisateur renseigne “bonjour” dans le champ “e-mail”).
-        ● Constituer un objet contact (à partir des données du formulaire) et
-        un tableau de produits.
-
-            https://www.pierre-giraud.com/javascript-apprendre-coder-cours/introduction-expression-reguliere-rationnelle/
-            search google : expressions régulières JavaScript email
-
-        Attention à bien vérifier les données saisies par l’utilisateur.
-        ● Lors de la vérification des données via des regex, attention à bien
-        mener des tests pour vérifier le bon fonctionnement des regex.
-        ● Ne pas oublier d’afficher un message d’erreur si nécessaire.
-
-
-
 order id recuoperer l'id
