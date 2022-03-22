@@ -128,27 +128,27 @@ else {
 
 
 
-const listIeleteItem = document.getElementsByClassName('deleteItem');
-console.log(listIeleteItem);
+// const listIeleteItem = document.getElementsByClassName('deleteItem');
+// console.log(listIeleteItem);
 
-listIeleteItem[0].addEventListener("click", (event => {
-  event.preventDefault;
-  var el = listIeleteItem[0].closest("article")//selectionnne l'article le plus proche
-  console.log(produitEnregistrerDansLeLocalStorage[0]);
-  console.log(el);
-}))
-listIeleteItem[1].addEventListener("click", (event => {
-  event.preventDefault;
-  var el = listIeleteItem[1].closest("article")//selectionnne l'article le plus proche
-  console.log(produitEnregistrerDansLeLocalStorage[1]);
-  console.log(el);
-}))
-listIeleteItem[2].addEventListener("click", (event => {
-  event.preventDefault;
-  var el = listIeleteItem[2].closest("article")//selectionnne l'article le plus proche
-  console.log(produitEnregistrerDansLeLocalStorage[2]);
-  console.log(el);
-}))
+// listIeleteItem[0].addEventListener("click", (event => {
+//   event.preventDefault;
+//   var el = listIeleteItem[0].closest("article")//selectionnne l'article le plus proche
+//   console.log(produitEnregistrerDansLeLocalStorage[0]);
+//   console.log(el);
+// }))
+// listIeleteItem[1].addEventListener("click", (event => {
+//   event.preventDefault;
+//   var el = listIeleteItem[1].closest("article")//selectionnne l'article le plus proche
+//   console.log(produitEnregistrerDansLeLocalStorage[1]);
+//   console.log(el);
+// }))
+// listIeleteItem[2].addEventListener("click", (event => {
+//   event.preventDefault;
+//   var el = listIeleteItem[2].closest("article")//selectionnne l'article le plus proche
+//   console.log(produitEnregistrerDansLeLocalStorage[2]);
+//   console.log(el);
+// }))
   //delete el;
   //localStorage.removeItem(key)
   // localStorage.removeItem("key")//supretion de la key
@@ -181,10 +181,10 @@ console.log(localStorage);
 //     event.preventDefault;
 //     console.log('zeae');
 // var el = btn_sup.closest("article")//selectionnne l'article le plus proche
-//console.log(el);
-//console.log(produitEnregistrerDansLeLocalStorage[debutBoucle]);
-//localStorage.removeItem("key");//supretion de la key
-//window.location.href = "http://127.0.0.1:5500/front/html/cart.html"//recharge la page
+// console.log(el);
+// console.log(produitEnregistrerDansLeLocalStorage[debutBoucle]);
+// localStorage.removeItem("key");//supretion de la key
+// window.location.href = "http://127.0.0.1:5500/front/html/cart.html"//recharge la page
 //   }))
 //   m++
 // }
@@ -267,6 +267,8 @@ const validFirstName = function (firstName) {
   //firstName valide
   else {
     testFirsName = true
+    firstNameErrorMsg.textContent = ""
+
     return true
   }
 }
@@ -300,6 +302,8 @@ const validLastName = function (lastName) {
   }
   else {
     testlastName = true
+    lastNameErrorMsg.textContent = ""
+
     return true
   }
 }
@@ -329,6 +333,8 @@ const validAddress = function (address) {
   //mdp valide
   else {
     testAddress = true
+    addressErrorMsg.textContent = ""
+
     return true
   }
 }
@@ -341,7 +347,7 @@ city.addEventListener("change", function () {
 const validCity = function (city) {
   let testCity = false
   //commencez avec une maj
-  if (!/^[A-Z]/.test(lastName.value)) {
+  if (!/^[A-Z]/.test(city.value)) {
     cityErrorMsg.textContent = "Commencez avec une majuscule"
     return false
   }
@@ -362,6 +368,7 @@ const validCity = function (city) {
   //city valide
   else {
     testCity = true
+    cityErrorMsg.textContent = ""
     return true
   }
 }
@@ -386,6 +393,8 @@ const validEmail = function (inputEmail) {
   //console.log(testEmail);
 
   if (testEmail == true) {
+    emailErrorMsg.textContent = ""
+
     return true
   }
   else {
@@ -419,42 +428,47 @@ Commander.addEventListener("click", (event) => {
 
   if (validEmail(email) && validCity(city) && validAddress(address) && validLastName(lastName) && validFirstName(firstName) == true) {
 
+    let produits = []
+    produitEnregistrerDansLeLocalStorage.forEach(element => {//element = ligne produi local storage
+      if ( !produits.includes(element._id) ) {//element _id n'es pas dans tableau alors on push
+        produits.push(element._id)
+      }
+    });
+    console.log(produits);
 
 
-    //--------------------------------commande
-    const Command = {
-      "firstName": firstName.value,
-      "lastName": lastName.value,
-      "address": address.value,
-      "price": city.value,
-      "city": city.value,
-      "email": email.value,
-      "panier": produitEnregistrerDansLeLocalStorage,
-    };
-    console.log(Command);
 
+
+    let envoi = {
+      contact: {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        address: address.value,
+        city: city.value,
+        email: email.value,
+      },
+      products: produits,
+    }
+console.log(envoi);
+envoi = JSON.stringify(envoi)
     ////********************************************************************local storage//********************************************************************
 
-    let CommandDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+    fetch("http://localhost:3000/api/products/order", {
+      method : "post", 
+      headers : {
+        'Content-Type': 'application/json'
+      },
+      mode : "no-cors",
+      body : (envoi) 
+    })
+    .then(reponse => reponse.json())
+    .then(resultat => {
+      console.log(resultat);
+      //recuperer le resultat pour la confirm
 
-    //--------------------------------pop-UP de validation
-    const popUp = () => {
-      if (window.confirm((lastName.value) + " " + (firstName.value) + "\n" + "Votre commande a bien été pris en compte pour la validé cliqué sur OK" + "\n" + "ou pour l\'annuler cliquée sur \"annuler\""))
-        window.location.href = "http://127.0.0.1:5500/front/html/confirmation.html";//----A MODIFIER
-    }
+    })    
 
-    if (CommandDansLeLocalStorage) {//si y a des produit dans le local storage on rajoute un objet 
-      CommandDansLeLocalStorage.push(Command);
-      localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
-      popUp();
-    }
-    else {
-      CommandDansLeLocalStorage = [];//sinon on creer  le tableau vide
-      CommandDansLeLocalStorage.replace(Command)//on creer la clef
-      localStorage.setItem("CommandEnregistre", JSON.stringify(CommandDansLeLocalStorage));
-      popUp();
-    }
-  }
+  }// si form ok
 
 });
 //}
