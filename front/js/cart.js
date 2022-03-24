@@ -2,8 +2,6 @@
 let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
 console.log(produitEnregistrerDansLeLocalStorage);
 
-console.log();
-
 var key = produitEnregistrerDansLeLocalStorage
 
 //********************************************************************boucle de construction********************************************************************
@@ -98,99 +96,97 @@ else {
 }
 
 //********************************************************************mise a jour de quantite********************************************************************
+/*
+let inputQuantite = document.querySelector(".itemQuantity")
+console.log(inputQuantite.value);
+console.log(key);
 
-// let inputQuantite = document.querySelector(".itemQuantity")
-// console.log(inputQuantite.value);
-// console.log(inputQuantite.value);
-
-//  var p = 0
-//  while (p < key.length) {
-//     let inputQuantite = document.querySelector(".itemQuantity")
-//     inputQuantite.addEventListener("change", function () {
-//       inputModif(this);
-//     })
-//     const inputModif = function (inputQuantiteValue) {
-//       var valeurInputModif = inputQuantite.value
-//       if (inputQuantite.value == quantite.value) {
-//         quantite.value = valeurInputModif
-//         console.log(inputQuantite.value + " a changer");
-//       }
-//       return quantite.value
-//     }
-//     p++
-//   }
+ var p = 0
+ while (p < key.length) {
+    let inputQuantite = document.querySelector(".itemQuantity")
+    inputQuantite.addEventListener("change", function () {
+      inputModif(this);
+    })
+    const inputModif = function (inputQuantiteValue) {
+      var valeurInputModif = inputQuantite.value
+      if (inputQuantite.value == quantite.value) {
+        quantite.value = valeurInputModif
+        console.log(inputQuantite.value + " a changer");
+      }
+      return quantite.value
+    }
+    p++
+  }
+*/
 
 // var qte = m.closest(1)
 // console.log(qte);
-//Element.closest()
+// Element.closest()
+
+console.log(key[0].quantity);//valeur de storage
+console.log(quantite.value);//valleur input
+
+let inputQuantite = document.querySelector(".itemQuantity")
+inputQuantite.addEventListener("change", function () {
+  er(this);
+})
+const er = function (inputQuantite) {
+  let newValeur = ""
+  //commencez avec une maj
+  if (quantite.value != key[0].quantity) {//! si il n'y as pas c'est faux & debut
+    newValeur = quantite.value
+    localStorage.setItem("key", [{ "quantity": "newValeur" }])
+    //n'arrive pas a modifie la clef du local storage
+
+  }
+  else {
+    newValeur = quantite.value
+  }
+  console.log(inputQuantite.value);
+}
+
+
+
 
 //********************************************************************btn sup********************************************************************
 
+localStorage.setItem('monChat', 'Tom');
+console.log(localStorage);
+// var cat = localStorage.getItem('myCat');//La syntaxe pour la lecture de l'article localStorage est la suivante
+// console.log(cat);
+//localStorage.removeItem('monChat');
+console.log(localStorage);
 
 
-// const listIeleteItem = document.getElementsByClassName('deleteItem');
-// console.log(listIeleteItem);
 
-// listIeleteItem[0].addEventListener("click", (event => {
-//   event.preventDefault;
-//   var el = listIeleteItem[0].closest("article")//selectionnne l'article le plus proche
-//   console.log(produitEnregistrerDansLeLocalStorage[0]);
-//   console.log(el);
-// }))
-// listIeleteItem[1].addEventListener("click", (event => {
-//   event.preventDefault;
-//   var el = listIeleteItem[1].closest("article")//selectionnne l'article le plus proche
-//   console.log(produitEnregistrerDansLeLocalStorage[1]);
-//   console.log(el);
-// }))
+const listIeleteItem = document.getElementsByClassName('deleteItem');
+console.log(listIeleteItem);
+
+listIeleteItem[0].addEventListener("click", (event => {
+  event.preventDefault;
+  var el = listIeleteItem[0].closest("article")//selectionnne l'article le plus proche
+  console.log(produitEnregistrerDansLeLocalStorage[0]);
+  console.log(el);
+  localStorage.removeItem/("key"[0])
+}))
+listIeleteItem[1].addEventListener("click", (event => {
+  event.preventDefault;
+  var el = listIeleteItem[1].closest("article")//selectionnne l'article le plus proche
+  console.log(produitEnregistrerDansLeLocalStorage[1]);
+  console.log(el);
+  localStorage.removeItem("key"[1])
+
+}))
 // listIeleteItem[2].addEventListener("click", (event => {
 //   event.preventDefault;
 //   var el = listIeleteItem[2].closest("article")//selectionnne l'article le plus proche
 //   console.log(produitEnregistrerDansLeLocalStorage[2]);
 //   console.log(el);
 // }))
-  //delete el;
-  //localStorage.removeItem(key)
-  // localStorage.removeItem("key")//supretion de la key
-  // window.location.href = "http://127.0.0.1:5500/front/html/cart.html"//recharge la page
-
-console.log(localStorage);
-// var debutBoucle = 0
-// console.log(debutBoucle);
-// while (debutBoucle < key.length) {
-//   listIeleteItem[debutBoucle].addEventListener("click", (event => {
-//     event.preventDefault;
-//     console.log( debutBoucle +' zeae');
-
-//   }))
-//   debutBoucle++
-// }
-
-
-//var elt = element.closest(selecteurs);
-
-
-// console.log(listBtn_sup[1]);
-//var btn_sup = document.querySelector(".deleteItem")
-//console.log(btn_sup);
-
-
-// var m = 0
-// while (m < key.length) {
-//   listBtn_sup[m].addEventListener("click", (event => {
-//     event.preventDefault;
-//     console.log('zeae');
-// var el = btn_sup.closest("article")//selectionnne l'article le plus proche
-// console.log(el);
-// console.log(produitEnregistrerDansLeLocalStorage[debutBoucle]);
-// localStorage.removeItem("key");//supretion de la key
+//delete el;
+//localStorage.removeItem(key)
+// localStorage.removeItem("key")//supretion de la key
 // window.location.href = "http://127.0.0.1:5500/front/html/cart.html"//recharge la page
-//   }))
-//   m++
-// }
-
-
-
 
 
 //var btn_sup = document.querySelector(".deleteItem")
@@ -430,7 +426,7 @@ Commander.addEventListener("click", (event) => {
 
     let produits = []
     produitEnregistrerDansLeLocalStorage.forEach(element => {//element = ligne produi local storage
-      if ( !produits.includes(element._id) ) {//element _id n'es pas dans tableau alors on push
+      if (!produits.includes(element._id)) {//element _id n'es pas dans tableau alors on push
         produits.push(element._id)
       }
     });
@@ -449,24 +445,24 @@ Commander.addEventListener("click", (event) => {
       },
       products: produits,
     }
-console.log(envoi);
-envoi = JSON.stringify(envoi)
+    console.log(envoi);
+    envoi = JSON.stringify(envoi)
     ////********************************************************************local storage//********************************************************************
 
     fetch("http://localhost:3000/api/products/order", {
-      method : "post", 
-      headers : {
+      method: "post",
+      headers: {
         'Content-Type': 'application/json'
       },
-      mode : "no-cors",
-      body : (envoi) 
+      mode: "no-cors",
+      body: (envoi)
     })
-    .then(reponse => reponse.json())
-    .then(resultat => {
-      console.log(resultat);
-      //recuperer le resultat pour la confirm
+      .then(reponse => reponse.json())
+      .then(resultat => {
+        console.log(resultat);
+        //recuperer le resultat pour la confirm
 
-    })    
+      })
 
   }// si form ok
 
