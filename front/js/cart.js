@@ -1,5 +1,6 @@
 
 let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
+console.log(produitEnregistrerDansLeLocalStorage[1]);
 console.log(produitEnregistrerDansLeLocalStorage);
 
 var key = produitEnregistrerDansLeLocalStorage
@@ -8,7 +9,7 @@ var key = produitEnregistrerDansLeLocalStorage
 
 var debutBoucle = 0
 
-if (key == null) { //panier vude
+if (key == null||key==0) { //panier vude
   var article = document.createElement("article");
   article.classList.add("cart__item")
   cart__items.appendChild(article);
@@ -151,9 +152,9 @@ key.forEach(element => {inputQuantite.addEventListener("change", function (){
 })})
 */
 
-produitEnregistrerDansLeLocalStorage.forEach(element => {//element = ligne produi local storage
-  console.log(element);//tu m'affiche tout les element
-})
+// produitEnregistrerDansLeLocalStorage.forEach(element => {//element = ligne produi local storage
+//   console.log(element);//tu m'affiche tout les element
+//})
 
 
 //********************************************************************btn sup********************************************************************
@@ -166,108 +167,64 @@ let boutonSup = [];
 let io = document.getElementsByClassName('deleteItem')//tt mes btn sup
 boutonSup.push(io)//met mes btn dans un tableau
 
-console.log(boutonSup);
-console.log(boutonSup[0]);
-console.log("");
-console.log(io);
-console.log(io[1]);
-console.log("");
-var monChat = ['Tom', 'Sandra']
-console.log(monChat);
-console.log(monChat[0]);
-console.log(monChat[1]);
-let removedItem = monChat.splice(1);
-console.log(monChat);
+// console.log(boutonSup);
+// console.log(boutonSup[0]);
+// console.log("");
+// console.log(io);
+// console.log(io[1]);
+// console.log("");
+// var monChat = ['Tom', 'Sandra']
+// console.log(monChat);
+// console.log(monChat[0]);
+// console.log(monChat[1]);
+// let removedItem = monChat.splice(1);
+// console.log(monChat);
 
-/*
-// const removeProduct = async (panierDisplay)/*atend la construc=>{
-//   await panierDisplay
-//   console.log("salut")
-//   let corbeille = document.getElementsByClassName('deleteItem')
+const listIeleteItem = document.getElementsByClassName('deleteItem');
+console.log(listIeleteItem);//mes bouton supprimer
+console.log(listIeleteItem.length);
 
-//   corbeille.forEach((produit) => {corbeille.addEventListener("click", ()=>{
-//     console.log(corbeille);
-//   })} )
+console.log("");
+
+ var test = 0
+ for (let test = 0; 1 < listIeleteItem.length.length; test++) {
+   listIeleteItem[test].addEventListener("click", (event => {//listIeleteItem[test]
+  event.preventDefault;
+  console.log("bonjour");
+  var el = listIeleteItem[test].closest("article")//selectionnne l'article le plus proche
+  console.log(el);
+  el.remove()//suprime l'element du dome
+  key.splice(0, 1)
+  console.log("-------- Apres Supretion --------");
+  console.log(key);
+  localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
+}))
 // }
 
 
-// var cat = localStorage.getItem('myCat');//La syntaxe pour la lecture de l'article localStorage est la suivante
-// console.log(cat);
-//localStorage.removeItem('monChat');
+
+console.log("-------- Commmande --------");
+console.log(key);//commande
 
 
 
-// const listIeleteItem = document.getElementsByClassName('deleteItem');
-// console.log(listIeleteItem);
+// var id = produitEnregistrerDansLeLocalStorage[test]._id
+// var btn_sup = document.querySelector(".deleteItem")
 
-// listIeleteItem[0].addEventListener("click", (event => {//evenement au click
+
+var test = 0
+// listIeleteItem[test].addEventListener("click", (event => {//listIeleteItem[test]
 //   event.preventDefault;
-//   var el = listIeleteItem[0].closest("article")//selectionnne l'article le plus proche
-//   console.log(produitEnregistrerDansLeLocalStorage[0]);//local storage
-//   console.log(el);//article=>page
-//   //localStorage.removeItem/(produitEnregistrerDansLeLocalStorage[0])
-//   localStorage.removeItem(produitEnregistrerDansLeLocalStorage[0])
-
-//   localStorage.removeItem("key"[0]);
-// }))
-// listIeleteItem[1].addEventListener("click", (event => {
-//   event.preventDefault;
-//   var el = listIeleteItem[1].closest("article")//selectionnne l'article le plus proche
-//   console.log();
+//   console.log("bonjour");
+//   var el = listIeleteItem[test].closest("article")//selectionnne l'article le plus proche
 //   console.log(el);
-//   //localStorage.removeItem(produitEnregistrerDansLeLocalStorage[1])
-//   localStorage.removeItem(produitEnregistrerDansLeLocalStorage[1])
-
-//   localStorage.removeItem(key[1]);
-
+//   el.remove()//suprime l'element du dome
+//   key.splice(0, 1)
+//   console.log("-------- Apres Supretion --------");
+//   console.log(key);
+//   localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
 // }))
 
-// listIeleteItem[2].addEventListener("click", (event => {
-//   event.preventDefault;
-//   var el = listIeleteItem[2].closest("article")//selectionnne l'article le plus proche
-//   console.log(produitEnregistrerDansLeLocalStorage[2]);
-//   console.log(el);
-//   localStorage.removeItem(produitEnregistrerDansLeLocalStorage[2])
-// }))
-
-// delete el;
-// localStorage.removeItem(key)
-// localStorage.removeItem("key")//supretion de la key
-// window.location.href = "http://127.0.0.1:5500/front/html/cart.html"//recharge la page
-
-
-//var btn_sup = document.querySelector(".deleteItem")
-//btn_sup.addEventListener("click", (event => {
-//event.preventDefault;
-//var el = btn_sup.closest("article")//selectionnne l'article le plus proche
-//console.log(el);
-
-//}))
-
-
-/* -----------------------------Exemple
-let produits = []
-    produitEnregistrerDansLeLocalStorage.forEach(element => {//element = ligne produi local storage
-      if (!produits.includes(element._id)) {//element _id n'es pas dans tableau alors on push
-        produits.push(element._id)
-      }
-    });
-    console.log(produits);
-*/
-
-const listIeleteItem = document.getElementsByClassName('deleteItem');
-console.log(listIeleteItem);
-
-console.log("c'est sa que je veur" + listIeleteItem[0]);
-
-var btn_sup = document.querySelector(".deleteItem")
-console.log(btn_sup);
-listIeleteItem[0].addEventListener("click", (event => {//listIeleteItem[0]
-  event.preventDefault;
-  console.log("bonjour");
-  var el = btn_sup.closest("article")//selectionnne l'article le plus proche
-  console.log(el);
-}))
 
 // console.log("");
 // console.log("Supprimer");
@@ -279,9 +236,37 @@ listIeleteItem[0].addEventListener("click", (event => {//listIeleteItem[0]
 //   console.log("bonjour");
 // }))
 
+/*video*/
+
+//suprimer un objet qui est dans un tableau
+/*
+let btn_suprimer = document.querySelectorAll(".deleteItem")//.btn suprimer////.deleteItem
+console.log(btn_suprimer);//vue de tout les btouton supprimer
+
+for (let l = 0; 1 < btn_suprimer.length; l++) {
+  btn_suprimer[l].addEventListener("click", (event) => {
+    event.preventDefault();
+    let id_sellectionnerLaSupression = produitEnregistrerDansLeLocalStorage[1].id_produitSelectionner;
+    console.log(id_sellectionnerLaSupression);//id du produit selectionner
+
+
+    //methode filter
+    produitEnregistrerDansLeLocalStorage = produitEnregistrerDansLeLocalStorage.filter(el => el.id_produitSelectionner !== id_sellectionnerLaSupression)
+    console.log(produitEnregistrerDansLeLocalStorage);
+
+    //envoie dans le LS
+    localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage)
+    )
+    //alerte
+    alert("produitsupprimer")
+    window.Location.href="http://127.0.0.1:5500/front/html/cart.html";//rajouter ligne ou key == 0
+  })
+}
+*/
+
 
 //********************************************************************les calcul quantité & price********************************************************************
-console.log(""); console.log("Quanntité & prix");
+console.log(""); console.log(""); console.log("Quanntité & prix");
 //--------------------------------quantity
 var debutBoucle = 0
 let quantityArray = [];
