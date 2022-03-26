@@ -1,20 +1,6 @@
-n arrive pas a faire fonctionner le p supprimer ligne 82
-
-    Gérer la modification et la suppression des produits dans la page Panier
-
-    Concernant la modification, il va falloir recourir à l événement de
-        modification (addEventListener de type change) pour observer le changement de la quantité.
-        ● Aussi, la méthode Element.closest() devrait permettre de cibler le
-            produit que vous souhaitez supprimer (où dont vous souhaitez modifier la quantité) grâce à son identifiant et sa couleur.
-
-    Attention à bien penser à modifier le DOM, mais aussi localStorage,
-        sinon les modifications effectuées dans le panier ne seront pas
-        conservées en cas de changement de page / de rafraîchissement de
-        la page
-
-        https://developer.mozilla.org/fr/docs/orphaned/Web/API/HTMLOrForeignElement/dataset
-
-
+Suppretion dynamque BUG
+    au chargement = "add event listener" en alerte sur les log ligne "172" sur le code n'empeche pas la suretion dynamique
+    lors de la derniere supretion de l'article = erreur "closest" qui empeche la supretion du dernier article dans le panier dans le DOME
 
 
 input de cart
@@ -23,15 +9,7 @@ input de cart
 
     
     afin de pouvoir chanher l input quantité
-        modifiera le prix total et la quantite taotal
-
-    Dans localStorage, attention de ne pas multiplier inutilement des éléments identiques
-
-Attention de ne pas dupliquer inutilement les éléments dans le
-tableau récapitulatif (le panier). S’il y a plusieurs produits identiques
-
-(même id + même couleur), cela ne doit donner lieu qu’à une seule
-ligne dans le tableau
+        modifiera le prix total et la quantite total
 
 https://openclassrooms.com/fr/paths/185/projects/675/assignment
 

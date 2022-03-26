@@ -9,7 +9,7 @@ var key = produitEnregistrerDansLeLocalStorage
 
 var debutBoucle = 0
 
-if (key == null||key==0) { //panier vude
+if (key == null || key == 0) { //panier vude
   var article = document.createElement("article");
   article.classList.add("cart__item")
   cart__items.appendChild(article);
@@ -158,64 +158,36 @@ key.forEach(element => {inputQuantite.addEventListener("change", function (){
 
 
 //********************************************************************btn sup********************************************************************
-
 console.log("");
-console.log("");
-
-//metre tout mes bouton sup dans un tableau
-let boutonSup = [];
-let io = document.getElementsByClassName('deleteItem')//tt mes btn sup
-boutonSup.push(io)//met mes btn dans un tableau
-
-// console.log(boutonSup);
-// console.log(boutonSup[0]);
-// console.log("");
-// console.log(io);
-// console.log(io[1]);
-// console.log("");
-// var monChat = ['Tom', 'Sandra']
-// console.log(monChat);
-// console.log(monChat[0]);
-// console.log(monChat[1]);
-// let removedItem = monChat.splice(1);
-// console.log(monChat);
-
-const listIeleteItem = document.getElementsByClassName('deleteItem');
-console.log(listIeleteItem);//mes bouton supprimer
-console.log(listIeleteItem.length);
-
-console.log("");
-
- var test = 0
- for (let test = 0; 1 < listIeleteItem.length.length; test++) {
-   listIeleteItem[test].addEventListener("click", (event => {//listIeleteItem[test]
-  event.preventDefault;
-  console.log("bonjour");
-  var el = listIeleteItem[test].closest("article")//selectionnne l'article le plus proche
-  console.log(el);
-  el.remove()//suprime l'element du dome
-  key.splice(0, 1)
-  console.log("-------- Apres Supretion --------");
-  console.log(key);
-  localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
-}))
-// }
-
-
-
 console.log("-------- Commmande --------");
 console.log(key);//commande
 
+const listIeleteItem = document.getElementsByClassName('deleteItem');
+console.log(listIeleteItem);//mes bouton supprimer
+console.log(listIeleteItem[0]);//regard pour comprendre pourquoi ke add event listener fonctionne pas
 
 
-// var id = produitEnregistrerDansLeLocalStorage[test]._id
-// var btn_sup = document.querySelector(".deleteItem")
 
+for (let debutBoucle = 0; 1 < listIeleteItem.length; debutBoucle++) {
+  listIeleteItem[debutBoucle].addEventListener("click", (event => {//listIeleteItem[l]
+    event.preventDefault;
+    var el = listIeleteItem[debutBoucle].closest("article")//selectionnne l'article le plus proche
+    console.log(el);
+    el.remove()//suprime l'element du dome
+    key.splice(0, 1)
+    console.log("-------- Apres Supretion --------");
+    console.log(key);
+    localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
+  }))
+}
 
-var test = 0
-// listIeleteItem[test].addEventListener("click", (event => {//listIeleteItem[test]
+/*-----------------------------------------non dynamyque fonctionelle-----------------------------------------*/
+
+//  var test = 0
+//  console.log(listIeleteItem[test]);
+//  for (let test = 0; 1 < listIeleteItem.length; test++) {
+//    listIeleteItem[test].addEventListener("click", (event => {//listIeleteItem[test]
 //   event.preventDefault;
-//   console.log("bonjour");
 //   var el = listIeleteItem[test].closest("article")//selectionnne l'article le plus proche
 //   console.log(el);
 //   el.remove()//suprime l'element du dome
@@ -224,45 +196,9 @@ var test = 0
 //   console.log(key);
 //   localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
 // }))
+// }
 
 
-// console.log("");
-// console.log("Supprimer");
-// const listIeleteItem = document.getElementsByClassName('deleteItem');
-// console.log(listIeleteItem);
-// console.log("");
-// var btn_sup = document.querySelector(".deleteItem")
-// btn_sup.addEventListener("click", (event => {
-//   console.log("bonjour");
-// }))
-
-/*video*/
-
-//suprimer un objet qui est dans un tableau
-/*
-let btn_suprimer = document.querySelectorAll(".deleteItem")//.btn suprimer////.deleteItem
-console.log(btn_suprimer);//vue de tout les btouton supprimer
-
-for (let l = 0; 1 < btn_suprimer.length; l++) {
-  btn_suprimer[l].addEventListener("click", (event) => {
-    event.preventDefault();
-    let id_sellectionnerLaSupression = produitEnregistrerDansLeLocalStorage[1].id_produitSelectionner;
-    console.log(id_sellectionnerLaSupression);//id du produit selectionner
-
-
-    //methode filter
-    produitEnregistrerDansLeLocalStorage = produitEnregistrerDansLeLocalStorage.filter(el => el.id_produitSelectionner !== id_sellectionnerLaSupression)
-    console.log(produitEnregistrerDansLeLocalStorage);
-
-    //envoie dans le LS
-    localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage)
-    )
-    //alerte
-    alert("produitsupprimer")
-    window.Location.href="http://127.0.0.1:5500/front/html/cart.html";//rajouter ligne ou key == 0
-  })
-}
-*/
 
 
 //********************************************************************les calcul quantité & price********************************************************************
