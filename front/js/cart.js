@@ -5,6 +5,7 @@ console.log(produitEnregistrerDansLeLocalStorage);
 var key = produitEnregistrerDansLeLocalStorage
 
 //********************************************************************boucle de construction********************************************************************
+
 var debutBoucle = 0
 
 if (key == null) { //panier vude
@@ -75,10 +76,6 @@ else {
     quantite.value = (key[debutBoucle].quantity)
     quantite.classList.add("itemQuantity")
     description.appendChild(quantite)
-
-
-
-
     //----------------------------------------------------------------création div = cart__item__content__settings__delete[delete]
     var seeting = document.createElement("div")
     seeting.classList.add("cart__item__content__settings__delete")
@@ -88,15 +85,13 @@ else {
     sup.classList.add("deleteItem")
     sup.textContent = "Supprimer"
     seeting.appendChild(sup)
-
-
-
     debutBoucle++
   }
 }
 
 //********************************************************************mise a jour de quantite********************************************************************
-/*
+/* RIEN fonctionne
+
 let inputQuantite = document.querySelector(".itemQuantity")
 console.log(inputQuantite.value);
 console.log(key);
@@ -123,9 +118,7 @@ console.log(key);
 // console.log(qte);
 // Element.closest()
 
-console.log(key[0].quantity);//valeur de storage
-console.log(quantite.value);//valleur input
-
+/*
 let inputQuantite = document.querySelector(".itemQuantity")
 inputQuantite.addEventListener("change", function () {
   er(this);
@@ -144,47 +137,101 @@ const er = function (inputQuantite) {
   }
   console.log(inputQuantite.value);
 }
+*/
 
 
+let inputQuantite = document.querySelector(".itemQuantity")
+/*
+key.forEach(element => {inputQuantite.addEventListener("change", function (){
+  if (quantite.value!=key.quantity) {
+    console.log(element)
+    newValeur = quantite.value
+    console.log(newValeur);
+  }
+})})
+*/
+
+produitEnregistrerDansLeLocalStorage.forEach(element => {//element = ligne produi local storage
+  console.log(element);//tu m'affiche tout les element
+})
 
 
 //********************************************************************btn sup********************************************************************
 
-localStorage.setItem('monChat', 'Tom');
-console.log(localStorage);
+console.log("");
+console.log("");
+
+//metre tout mes bouton sup dans un tableau
+let boutonSup = [];
+let io = document.getElementsByClassName('deleteItem')//tt mes btn sup
+boutonSup.push(io)//met mes btn dans un tableau
+
+console.log(boutonSup);
+console.log(boutonSup[0]);
+console.log("");
+console.log(io);
+console.log(io[1]);
+console.log("");
+var monChat = ['Tom', 'Sandra']
+console.log(monChat);
+console.log(monChat[0]);
+console.log(monChat[1]);
+let removedItem = monChat.splice(1);
+console.log(monChat);
+
+/*
+// const removeProduct = async (panierDisplay)/*atend la construc=>{
+//   await panierDisplay
+//   console.log("salut")
+//   let corbeille = document.getElementsByClassName('deleteItem')
+
+//   corbeille.forEach((produit) => {corbeille.addEventListener("click", ()=>{
+//     console.log(corbeille);
+//   })} )
+// }
+
+
 // var cat = localStorage.getItem('myCat');//La syntaxe pour la lecture de l'article localStorage est la suivante
 // console.log(cat);
 //localStorage.removeItem('monChat');
-console.log(localStorage);
 
 
 
-const listIeleteItem = document.getElementsByClassName('deleteItem');
-console.log(listIeleteItem);
+// const listIeleteItem = document.getElementsByClassName('deleteItem');
+// console.log(listIeleteItem);
 
-listIeleteItem[0].addEventListener("click", (event => {
-  event.preventDefault;
-  var el = listIeleteItem[0].closest("article")//selectionnne l'article le plus proche
-  console.log(produitEnregistrerDansLeLocalStorage[0]);
-  console.log(el);
-  localStorage.removeItem/("key"[0])
-}))
-listIeleteItem[1].addEventListener("click", (event => {
-  event.preventDefault;
-  var el = listIeleteItem[1].closest("article")//selectionnne l'article le plus proche
-  console.log(produitEnregistrerDansLeLocalStorage[1]);
-  console.log(el);
-  localStorage.removeItem("key"[1])
+// listIeleteItem[0].addEventListener("click", (event => {//evenement au click
+//   event.preventDefault;
+//   var el = listIeleteItem[0].closest("article")//selectionnne l'article le plus proche
+//   console.log(produitEnregistrerDansLeLocalStorage[0]);//local storage
+//   console.log(el);//article=>page
+//   //localStorage.removeItem/(produitEnregistrerDansLeLocalStorage[0])
+//   localStorage.removeItem(produitEnregistrerDansLeLocalStorage[0])
 
-}))
+//   localStorage.removeItem("key"[0]);
+// }))
+// listIeleteItem[1].addEventListener("click", (event => {
+//   event.preventDefault;
+//   var el = listIeleteItem[1].closest("article")//selectionnne l'article le plus proche
+//   console.log();
+//   console.log(el);
+//   //localStorage.removeItem(produitEnregistrerDansLeLocalStorage[1])
+//   localStorage.removeItem(produitEnregistrerDansLeLocalStorage[1])
+
+//   localStorage.removeItem(key[1]);
+
+// }))
+
 // listIeleteItem[2].addEventListener("click", (event => {
 //   event.preventDefault;
 //   var el = listIeleteItem[2].closest("article")//selectionnne l'article le plus proche
 //   console.log(produitEnregistrerDansLeLocalStorage[2]);
 //   console.log(el);
+//   localStorage.removeItem(produitEnregistrerDansLeLocalStorage[2])
 // }))
-//delete el;
-//localStorage.removeItem(key)
+
+// delete el;
+// localStorage.removeItem(key)
 // localStorage.removeItem("key")//supretion de la key
 // window.location.href = "http://127.0.0.1:5500/front/html/cart.html"//recharge la page
 
@@ -198,8 +245,43 @@ listIeleteItem[1].addEventListener("click", (event => {
 //}))
 
 
-//********************************************************************les calcul quantité & price********************************************************************
+/* -----------------------------Exemple
+let produits = []
+    produitEnregistrerDansLeLocalStorage.forEach(element => {//element = ligne produi local storage
+      if (!produits.includes(element._id)) {//element _id n'es pas dans tableau alors on push
+        produits.push(element._id)
+      }
+    });
+    console.log(produits);
+*/
 
+const listIeleteItem = document.getElementsByClassName('deleteItem');
+console.log(listIeleteItem);
+
+console.log("c'est sa que je veur" + listIeleteItem[0]);
+
+var btn_sup = document.querySelector(".deleteItem")
+console.log(btn_sup);
+listIeleteItem[0].addEventListener("click", (event => {//listIeleteItem[0]
+  event.preventDefault;
+  console.log("bonjour");
+  var el = btn_sup.closest("article")//selectionnne l'article le plus proche
+  console.log(el);
+}))
+
+// console.log("");
+// console.log("Supprimer");
+// const listIeleteItem = document.getElementsByClassName('deleteItem');
+// console.log(listIeleteItem);
+// console.log("");
+// var btn_sup = document.querySelector(".deleteItem")
+// btn_sup.addEventListener("click", (event => {
+//   console.log("bonjour");
+// }))
+
+
+//********************************************************************les calcul quantité & price********************************************************************
+console.log(""); console.log("Quanntité & prix");
 //--------------------------------quantity
 var debutBoucle = 0
 let quantityArray = [];
@@ -230,7 +312,7 @@ var reducerPrice = (accumulator, curenceValue) => accumulator + curenceValue
 const priceTotal = priceArray.reduce(reducerPrice);
 
 totalPrice.textContent = priceTotal
-
+console.log("");
 
 //********************************************************************reg Exp********************************************************************
 
