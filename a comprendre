@@ -6,12 +6,7 @@ Suppretion dynamque BUG
         Si 1,2,3 erreur 
         Si 1 bloc ne supprime pas
 
-
-input de cart fonctionnelle mais ERREUR
-    Cannot read properties of undefined (reading 'addEventListener')
-    
-    afin de pouvoir chanher l input quantité
-        modifiera le prix total et la quantite total
+Pk quand il reste plus qu'un article dans mon panier je suis obligé de rechargé la pages pour pour pouvoir supprimer ce derneier
 
 https://openclassrooms.com/fr/paths/185/projects/675/assignment
 

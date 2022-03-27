@@ -8,7 +8,7 @@ var key = produitEnregistrerDansLeLocalStorage
 
 var debutBoucle = 0
 
-if (key == null || key.length == 0) { //panier vide
+if (key == null || key.length === 0) { //panier vide
   var article = document.createElement("article");
   article.classList.add("cart__item")
   cart__items.appendChild(article);
@@ -93,9 +93,6 @@ else {
 console.log(""); console.log("Mise a jour quantité");
 var inputQuantit = document.getElementsByClassName('itemQuantity');
 console.log(inputQuantit);
-//let inputQuantity = document.querySelector(".itemQuantity")
-//var test = inputQuantit[debutBoucle]
-// console.log(test);
 
 for (let debutBoucle = 0; debutBoucle < inputQuantit.length; debutBoucle++) {
   inputQuantit[debutBoucle].addEventListener("change", function () {
@@ -142,6 +139,16 @@ console.log(listDeleteItem[0]);
 for (let debutBoucle = 0; debutBoucle < listDeleteItem.length; debutBoucle++) {
   listDeleteItem[debutBoucle].addEventListener("click", function () {
     functionSup(this);
+    console.log(key.length);
+    if (key.length == 0) {
+      localStorage.clear()//suprime la clef du local storage
+      var article = document.createElement("article");
+      article.classList.add("cart__item")
+      cart__items.appendChild(article);
+      var itemAbs = document.createElement("p")
+      itemAbs.textContent = "Votre pannier a bien été supprimer"
+      article.appendChild(itemAbs)
+    }
   })
   const functionSup = function (btnSup) {
     var el = listDeleteItem[debutBoucle].closest("article")//selectionnne l'article le plus proche
@@ -151,7 +158,10 @@ for (let debutBoucle = 0; debutBoucle < listDeleteItem.length; debutBoucle++) {
     console.log(key);
     localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
   }
+
+
 }
+
 
 /*-----------------------------------------non dynamyque fonctionelle-----------------------------------------*/
 
@@ -177,20 +187,28 @@ for (let debutBoucle = 0; debutBoucle < listDeleteItem.length; debutBoucle++) {
 
 //********************************************************************les calcul quantité & price********************************************************************
 console.log(""); console.log("Quanntité & prix");
+
+//test
+console.log(inputQuantit);
+
+
 //--------------------------------quantity
 var debutBoucle = 0
 let quantityArray = [];
 while (debutBoucle < key.length) {
-
-  //modif a apporter
-  quantityArray.push(key[debutBoucle].quantity)
-
-
+  console.log(inputQuantit[debutBoucle].value);
+  quantityArray.push(inputQuantit[debutBoucle].value)
   debutBoucle++
 }
-console.log(quantityArray);
-var reducer = (accumulator, curenceValue) => accumulator + curenceValue
-const quantiteTotal = quantityArray.reduce(reducer);
+
+let quantiteTotal = 0
+for (let debutBoucle = 0; debutBoucle < quantityArray.length; debutBoucle++) {
+  quantiteTotal += Number(quantityArray[debutBoucle]);
+}
+
+console.log(quantiteTotal);
+
+//const quantiteTotal = quantityArray.reduce(reducer);
 
 totalQuantity.textContent = quantiteTotal
 
