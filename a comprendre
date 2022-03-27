@@ -1,6 +1,10 @@
 Suppretion dynamque BUG
     au chargement = "add event listener" en alerte sur les log ligne "172" sur le code n'empeche pas la suretion dynamique
     lors de la derniere supretion de l'article = erreur "closest" qui empeche la supretion du dernier article dans le panier dans le DOME
+        SI 3,2,1 fonctionne
+        SI 2,3,1 erreur bloc au au 2 
+        Si 1,2,3 erreur 
+        Si 1 bloc ne supprime pas
 
 
 input de cart

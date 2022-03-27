@@ -9,7 +9,7 @@ var key = produitEnregistrerDansLeLocalStorage
 
 var debutBoucle = 0
 
-if (key == null || key == 0) { //panier vude
+if (key == null || key.length == 0) { //panier vide
   var article = document.createElement("article");
   article.classList.add("cart__item")
   cart__items.appendChild(article);
@@ -91,71 +91,35 @@ else {
 }
 
 //********************************************************************mise a jour de quantite********************************************************************
-/* RIEN fonctionne
 
-let inputQuantite = document.querySelector(".itemQuantity")
-console.log(inputQuantite.value);
+console.log("");
+console.log("Avent changement");
 console.log(key);
+console.log("");
 
- var p = 0
- while (p < key.length) {
-    let inputQuantite = document.querySelector(".itemQuantity")
-    inputQuantite.addEventListener("change", function () {
-      inputModif(this);
-    })
-    const inputModif = function (inputQuantiteValue) {
-      var valeurInputModif = inputQuantite.value
-      if (inputQuantite.value == quantite.value) {
-        quantite.value = valeurInputModif
-        console.log(inputQuantite.value + " a changer");
-      }
-      return quantite.value
-    }
-    p++
-  }
-*/
 
-// var qte = m.closest(1)
-// console.log(qte);
-// Element.closest()
+//for (let debutBoucle = 0; 1 < key.length; debutBoucle++) {}
 
-/*
-let inputQuantite = document.querySelector(".itemQuantity")
-inputQuantite.addEventListener("change", function () {
+
+
+/*-----------------------------------------non dynamyque fonctionelle-----------------------------------------*/
+
+
+let inputQuantit = document.querySelector(".itemQuantity")
+
+inputQuantit.addEventListener("change", function () {
   er(this);
 })
 const er = function (inputQuantite) {
-  let newValeur = ""
   //commencez avec une maj
-  if (quantite.value != key[0].quantity) {//! si il n'y as pas c'est faux & debut
-    newValeur = quantite.value
-    localStorage.setItem("key", [{ "quantity": "newValeur" }])
-    //n'arrive pas a modifie la clef du local storage
-
+  if (key[0].quantity != inputQuantit.value) {
+    key[0].quantity = inputQuantit.value
+    localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
   }
-  else {
-    newValeur = quantite.value
-  }
-  console.log(inputQuantite.value);
+  console.log("----------NEW QUANTITE----------");
+  console.log("key a changé de valleur " + key[0].quantity);
+  console.log(key);
 }
-*/
-
-
-let inputQuantite = document.querySelector(".itemQuantity")
-/*
-key.forEach(element => {inputQuantite.addEventListener("change", function (){
-  if (quantite.value!=key.quantity) {
-    console.log(element)
-    newValeur = quantite.value
-    console.log(newValeur);
-  }
-})})
-*/
-
-// produitEnregistrerDansLeLocalStorage.forEach(element => {//element = ligne produi local storage
-//   console.log(element);//tu m'affiche tout les element
-//})
-
 
 //********************************************************************btn sup********************************************************************
 console.log("");
@@ -167,9 +131,8 @@ console.log(listIeleteItem);//mes bouton supprimer
 console.log(listIeleteItem[0]);//regard pour comprendre pourquoi ke add event listener fonctionne pas
 
 
-
 for (let debutBoucle = 0; 1 < listIeleteItem.length; debutBoucle++) {
-  listIeleteItem[debutBoucle].addEventListener("click", (event => {//listIeleteItem[l]
+  listIeleteItem[debutBoucle].addEventListener("click", (event => {
     event.preventDefault;
     var el = listIeleteItem[debutBoucle].closest("article")//selectionnne l'article le plus proche
     console.log(el);
@@ -198,6 +161,7 @@ for (let debutBoucle = 0; 1 < listIeleteItem.length; debutBoucle++) {
 // }))
 // }
 
+/*------------------------------------------------------------------------------------------------------------*/
 
 
 
