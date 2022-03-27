@@ -1,6 +1,5 @@
 
 let produitEnregistrerDansLeLocalStorage = JSON.parse(localStorage.getItem("key"));//JSON.parse pour convertir JSON en JAVASCIPT
-console.log(produitEnregistrerDansLeLocalStorage[1]);
 console.log(produitEnregistrerDansLeLocalStorage);
 
 var key = produitEnregistrerDansLeLocalStorage
@@ -90,75 +89,86 @@ else {
   }
 }
 
-//********************************************************************mise a jour de quantite********************************************************************
+//*****************************************************************mise a jour de quantite*****************************************************************
+console.log(""); console.log("Mise a jour quantité");
+var inputQuantit = document.getElementsByClassName('itemQuantity');
+console.log(inputQuantit);
+//let inputQuantity = document.querySelector(".itemQuantity")
+//var test = inputQuantit[debutBoucle]
+// console.log(test);
 
-console.log("");
-console.log("Avent changement");
-console.log(key);
-console.log("");
-
-
-//for (let debutBoucle = 0; 1 < key.length; debutBoucle++) {}
-
-
+for (let debutBoucle = 0; debutBoucle < inputQuantit.length; debutBoucle++) {
+  inputQuantit[debutBoucle].addEventListener("change", function () {
+    functionInput(this);
+  })
+  const functionInput = function (inputQuantit) {
+    if (key[debutBoucle].quantity != inputQuantit.value) {
+      key[debutBoucle].quantity = inputQuantit.value
+      localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
+    }
+    console.log("----------NEW QUANTITE----------");
+    console.log(key[debutBoucle]);
+  }
+}
 
 /*-----------------------------------------non dynamyque fonctionelle-----------------------------------------*/
 
+// var debutBoucle = 2
+// var inputQuantit = document.getElementsByClassName('itemQuantity');
+// let inputQuantity = document.querySelector(".itemQuantity")
+// var test = inputQuantit[debutBoucle]
+// console.log(test);
 
-let inputQuantit = document.querySelector(".itemQuantity")
+// test.addEventListener("change", (event => {
+//   event.preventDefault;
+//   if (key[debutBoucle].quantity != test.value) {
+//     console.log("est diferant " + inputQuantit[debutBoucle].value);
+//     key[debutBoucle].quantity = inputQuantit[debutBoucle].value
+//     localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
+//   }
+//   console.log("----------NEW QUANTITE----------");
+//   console.log("key a changé de valleur " + key[debutBoucle].quantity);
+//   console.log(key);
+//   console.log(debutBoucle);
+// }))
 
-inputQuantit.addEventListener("change", function () {
-  er(this);
-})
-const er = function (inputQuantite) {
-  //commencez avec une maj
-  if (key[0].quantity != inputQuantit.value) {
-    key[0].quantity = inputQuantit.value
-    localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
-  }
-  console.log("----------NEW QUANTITE----------");
-  console.log("key a changé de valleur " + key[0].quantity);
-  console.log(key);
-}
+//********************************************************************Btn Sup Erreur*****************************************************************
+console.log(""); console.log("Bouton supprimer");
 
-//********************************************************************btn sup********************************************************************
-console.log("");
-console.log("-------- Commmande --------");
-console.log(key);//commande
+const listDeleteItem = document.getElementsByClassName('deleteItem');
+console.log(listDeleteItem);//mes bouton supprimer
 
-const listIeleteItem = document.getElementsByClassName('deleteItem');
-console.log(listIeleteItem);//mes bouton supprimer
-console.log(listIeleteItem[0]);//regard pour comprendre pourquoi ke add event listener fonctionne pas
-
-
-for (let debutBoucle = 0; 1 < listIeleteItem.length; debutBoucle++) {
-  listIeleteItem[debutBoucle].addEventListener("click", (event => {
-    event.preventDefault;
-    var el = listIeleteItem[debutBoucle].closest("article")//selectionnne l'article le plus proche
-    console.log(el);
+console.log(listDeleteItem[0]);
+for (let debutBoucle = 0; debutBoucle < listDeleteItem.length; debutBoucle++) {
+  listDeleteItem[debutBoucle].addEventListener("click", function () {
+    functionSup(this);
+  })
+  const functionSup = function (btnSup) {
+    var el = listDeleteItem[debutBoucle].closest("article")//selectionnne l'article le plus proche
     el.remove()//suprime l'element du dome
     key.splice(0, 1)
     console.log("-------- Apres Supretion --------");
     console.log(key);
     localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
-  }))
+  }
 }
 
 /*-----------------------------------------non dynamyque fonctionelle-----------------------------------------*/
 
 //  var test = 0
-//  console.log(listIeleteItem[test]);
-//  for (let test = 0; 1 < listIeleteItem.length; test++) {
-//    listIeleteItem[test].addEventListener("click", (event => {//listIeleteItem[test]
-//   event.preventDefault;
-//   var el = listIeleteItem[test].closest("article")//selectionnne l'article le plus proche
-//   console.log(el);
-//   el.remove()//suprime l'element du dome
-//   key.splice(0, 1)
-//   console.log("-------- Apres Supretion --------");
-//   console.log(key);
-//   localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
-// }))
+
+// console.log(listIeleteItem[test]);
+// for (let test = 0; 1 < listIeleteItem.length; test++) {
+//   listIeleteItem[test].addEventListener("click", (event => {//listIeleteItem[test]
+//     event.preventDefault;
+//     var el = listIeleteItem[test].closest("article")//selectionnne l'article le plus proche
+//     console.log(el);
+//     el.remove()//suprime l'element du dome
+//     key.splice(0, 1)
+//     console.log("-------- Apres Supretion --------");
+//     console.log(key);
+//     localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
+//   }))
 // }
 
 /*------------------------------------------------------------------------------------------------------------*/
@@ -166,7 +176,7 @@ for (let debutBoucle = 0; 1 < listIeleteItem.length; debutBoucle++) {
 
 
 //********************************************************************les calcul quantité & price********************************************************************
-console.log(""); console.log(""); console.log("Quanntité & prix");
+console.log(""); console.log("Quanntité & prix");
 //--------------------------------quantity
 var debutBoucle = 0
 let quantityArray = [];

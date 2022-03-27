@@ -7,10 +7,8 @@ Suppretion dynamque BUG
         Si 1 bloc ne supprime pas
 
 
-input de cart
-
-    atribut onChange
-
+input de cart fonctionnelle mais ERREUR
+    Cannot read properties of undefined (reading 'addEventListener')
     
     afin de pouvoir chanher l input quantité
         modifiera le prix total et la quantite total
@@ -19,5 +17,5 @@ https://openclassrooms.com/fr/paths/185/projects/675/assignment
 
 
 
-order id recuoperer l'id
+order id recupperer l'id
 
