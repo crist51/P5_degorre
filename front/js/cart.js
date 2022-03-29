@@ -8,13 +8,17 @@ var key = produitEnregistrerDansLeLocalStorage
 
 var debutBoucle = 0
 
-if (key == null || key.length === 0) { //panier vide
+function panierVide(message_vide) {
   var article = document.createElement("article");
   article.classList.add("cart__item")
   cart__items.appendChild(article);
   var itemAbs = document.createElement("p")
   itemAbs.textContent = "Votre panier est vide"
   article.appendChild(itemAbs)
+}
+
+if (key == null || key.length == 0) {
+  panierVide()
 }
 else {
   while (debutBoucle < key.length) {
@@ -89,45 +93,65 @@ else {
   }
 }
 
+//********************************************************************les calcul quantité & price********************************************************************
+console.log(""); console.log("Quanntité & prix");
+
+//--------------------------------quantity
+
+if (key != null) {
+  function calculQuantity(keyQuantity) {
+    let quantiteTotal = 0;
+    for (let debutBoucle = 0; debutBoucle < key.length; debutBoucle++) {
+      quantiteTotal += Number(key[debutBoucle].quantity);
+    }
+    console.log(quantiteTotal);
+    totalQuantity.textContent = quantiteTotal
+  }
+  calculQuantity()
+  //-------------------------------prix
+  var priceArray = []
+
+  function calculPrice(price) {
+    var debutBoucle = 0;
+    priceArray.length = 0;///reset la taille du tableau
+    while (debutBoucle < key.length) {
+      var priceTotalArticle = Number(key[debutBoucle].price * key[debutBoucle].quantity);
+      priceArray.push(priceTotalArticle);
+      debutBoucle++;
+    }
+    var prixTotal = 0;
+    for (let debutBoucle = 0; debutBoucle < priceArray.length; debutBoucle++) {
+
+      prixTotal += Number(priceArray[debutBoucle]);
+    }
+    console.log(prixTotal);
+    totalPrice.textContent = prixTotal;
+  }
+  calculPrice();
+}
 //*****************************************************************mise a jour de quantite*****************************************************************
-console.log(""); console.log("Mise a jour quantité");
+
+console.log("");
+console.log("Mise a jour quantité");
 var inputQuantit = document.getElementsByClassName('itemQuantity');
 console.log(inputQuantit);
-
 for (let debutBoucle = 0; debutBoucle < inputQuantit.length; debutBoucle++) {
   inputQuantit[debutBoucle].addEventListener("change", function () {
     functionInput(this);
   })
   const functionInput = function (inputQuantit) {
     if (key[debutBoucle].quantity != inputQuantit.value) {
-      key[debutBoucle].quantity = inputQuantit.value
-      localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
+      key[debutBoucle].quantity = inputQuantit.value;
+      localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
     }
     console.log("----------NEW QUANTITE----------");
-    console.log(key[debutBoucle]);
+    console.log(key);
+    calculQuantity();
+    calculPrice();
+    console.log(key[debutBoucle].quantity);
+    console.log(key[debutBoucle].price);
   }
 }
-
-/*-----------------------------------------non dynamyque fonctionelle-----------------------------------------*/
-
-// var debutBoucle = 2
-// var inputQuantit = document.getElementsByClassName('itemQuantity');
-// let inputQuantity = document.querySelector(".itemQuantity")
-// var test = inputQuantit[debutBoucle]
-// console.log(test);
-
-// test.addEventListener("change", (event => {
-//   event.preventDefault;
-//   if (key[debutBoucle].quantity != test.value) {
-//     console.log("est diferant " + inputQuantit[debutBoucle].value);
-//     key[debutBoucle].quantity = inputQuantit[debutBoucle].value
-//     localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
-//   }
-//   console.log("----------NEW QUANTITE----------");
-//   console.log("key a changé de valleur " + key[debutBoucle].quantity);
-//   console.log(key);
-//   console.log(debutBoucle);
-// }))
 
 //********************************************************************Btn Sup Erreur*****************************************************************
 console.log(""); console.log("Bouton supprimer");
@@ -135,97 +159,39 @@ console.log(""); console.log("Bouton supprimer");
 const listDeleteItem = document.getElementsByClassName('deleteItem');
 console.log(listDeleteItem);//mes bouton supprimer
 
-console.log(listDeleteItem[0]);
 for (let debutBoucle = 0; debutBoucle < listDeleteItem.length; debutBoucle++) {
   listDeleteItem[debutBoucle].addEventListener("click", function () {
     functionSup(this);
-    console.log(key.length);
-    if (key.length == 0) {
-      localStorage.clear()//suprime la clef du local storage
-      var article = document.createElement("article");
-      article.classList.add("cart__item")
-      cart__items.appendChild(article);
-      var itemAbs = document.createElement("p")
-      itemAbs.textContent = "Votre pannier a bien été supprimer"
-      article.appendChild(itemAbs)
-    }
   })
   const functionSup = function (btnSup) {
-    var el = listDeleteItem[debutBoucle].closest("article")//selectionnne l'article le plus proche
-    el.remove()//suprime l'element du dome
-    key.splice(0, 1)
+    console.log(listDeleteItem);//ok
+    console.log(listDeleteItem.length);
+    console.log(debutBoucle);//ok
+    console.log(listDeleteItem[debutBoucle]);
+    console.log(el);//selectionnne l'article le plus proche
+    var el = listDeleteItem[debutBoucle].closest("article");
+    el.remove();//suprime l'element du dome
+    key.splice(0, 1);
+    //test
+    calculQuantity();
+    calculPrice();
     console.log("-------- Apres Supretion --------");
     console.log(key);
-    localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
+    //supprimer la quantité et le prix
+    localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
+    console.log(debutBoucle);
+
+    //----------------palie une erreur 
+    if (listDeleteItem.length == 1) {
+      window.location.href = "http://127.0.0.1:5500/front/html/cart.html";
+    }
+    //----------------
+
+    if (listDeleteItem.length == 0) {
+      panierVide(); //panier vide
+    }
   }
-
-
 }
-
-
-/*-----------------------------------------non dynamyque fonctionelle-----------------------------------------*/
-
-//  var test = 0
-
-// console.log(listIeleteItem[test]);
-// for (let test = 0; 1 < listIeleteItem.length; test++) {
-//   listIeleteItem[test].addEventListener("click", (event => {//listIeleteItem[test]
-//     event.preventDefault;
-//     var el = listIeleteItem[test].closest("article")//selectionnne l'article le plus proche
-//     console.log(el);
-//     el.remove()//suprime l'element du dome
-//     key.splice(0, 1)
-//     console.log("-------- Apres Supretion --------");
-//     console.log(key);
-//     localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage))
-//   }))
-// }
-
-/*------------------------------------------------------------------------------------------------------------*/
-
-
-
-//********************************************************************les calcul quantité & price********************************************************************
-console.log(""); console.log("Quanntité & prix");
-
-//test
-console.log(inputQuantit);
-
-
-//--------------------------------quantity
-var debutBoucle = 0
-let quantityArray = [];
-while (debutBoucle < key.length) {
-  console.log(inputQuantit[debutBoucle].value);
-  quantityArray.push(inputQuantit[debutBoucle].value)
-  debutBoucle++
-}
-
-let quantiteTotal = 0
-for (let debutBoucle = 0; debutBoucle < quantityArray.length; debutBoucle++) {
-  quantiteTotal += Number(quantityArray[debutBoucle]);
-}
-
-console.log(quantiteTotal);
-
-//const quantiteTotal = quantityArray.reduce(reducer);
-
-totalQuantity.textContent = quantiteTotal
-
-//--------------------------------price
-let priceArray = [];
-var debutBoucle = 0
-while (debutBoucle < key.length) {
-  var priceTotalArticle = key[debutBoucle].price * quantityArray[debutBoucle]//quantiter * prix
-  priceArray.push(priceTotalArticle)
-  debutBoucle++
-}
-console.log(priceArray);
-var reducerPrice = (accumulator, curenceValue) => accumulator + curenceValue
-const priceTotal = priceArray.reduce(reducerPrice);
-
-totalPrice.textContent = priceTotal
-console.log("");
 
 //********************************************************************reg Exp********************************************************************
 
@@ -444,22 +410,20 @@ Commander.addEventListener("click", (event) => {
     envoi = JSON.stringify(envoi)
     ////********************************************************************local storage//********************************************************************
 
-    fetch("http://localhost:3000/api/products/order", {
-      method: "post",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      mode: "no-cors",
-      body: (envoi)
-    })
-      .then(reponse => reponse.json())
-      .then(resultat => {
-        console.log(resultat);
-        //recuperer le resultat pour la confirm
+        fetch("http://localhost:3000/api/products/order", {
+          method: "post",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          mode: "no-cors",
+          body: (envoi)
+        })
+          .then(reponse => reponse.json())
+          .then(resultat => {
+            console.log(resultat);
+            //recuperer le resultat pour la confirm
+          })
 
-      })
+      }// si form ok
 
-  }// si form ok
-
-});
-//}
+    });
