@@ -154,45 +154,41 @@ for (let debutBoucle = 0; debutBoucle < inputQuantit.length; debutBoucle++) {
 }
 
 //********************************************************************Btn Sup Erreur*****************************************************************
+
+
 console.log(""); console.log("Bouton supprimer");
 
 const listDeleteItem = document.getElementsByClassName('deleteItem');
 console.log(listDeleteItem);//mes bouton supprimer
-
-for (let debutBoucle = 0; debutBoucle < listDeleteItem.length; debutBoucle++) {
+ 
+ 
+for (let debutBoucle = 0; debutBoucle < key.length; debutBoucle++) {
   listDeleteItem[debutBoucle].addEventListener("click", function () {
     functionSup(this);
   })
   const functionSup = function (btnSup) {
-    console.log(listDeleteItem);//ok
-    console.log(listDeleteItem.length);
-    console.log(debutBoucle);//ok
-    console.log(listDeleteItem[debutBoucle]);
-    console.log(el);//selectionnne l'article le plus proche
+ 
+    let pos = key.indexOf(debutBoucle)
+    console.log(pos);
+ 
+ 
     var el = listDeleteItem[debutBoucle].closest("article");
+    console.log(el);//selectionnne l'article le plus proche
     el.remove();//suprime l'element du dome
-    key.splice(0, 1);
-    //test
+    console.log(listDeleteItem);//mes bouton supprimer
+    key.splice(debutBoucle, 1);
     calculQuantity();
     calculPrice();
     console.log("-------- Apres Supretion --------");
-    console.log(key);
     //supprimer la quantité et le prix
     localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
-    console.log(debutBoucle);
+    console.log(debutBoucle); 
+    window.location.reload()
 
-    //----------------palie une erreur 
-    if (listDeleteItem.length == 1) {
-      window.location.reload()
-    }
-  }
-  //----------------
-
-  if (listDeleteItem.length == 0) {
-    panierVide(); //panier vide
   }
 }
-
+console.log(key);
+console.log();
 //********************************************************************reg Exp********************************************************************
 
 //--------------------------------rexExp firstName
