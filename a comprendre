@@ -1,16 +1,10 @@
-Suppretion dynamque BUG
-    au chargement = "add event listener" en alerte sur les log ligne "172" sur le code n'empeche pas la suretion dynamique
-    lors de la derniere supretion de l'article = erreur "closest" qui empeche la supretion du dernier article dans le panier dans le DOME
-        SI 3,2,1 fonctionne
-        SI 2,3,1 erreur bloc au au 2 
-        Si 1,2,3 erreur 
-        Si 1 bloc ne supprime pas
+faut recuperer l'id lorsque je clique sur le lien su  canape voulut
 
-Pk quand il reste plus qu'un article dans mon panier je suis obligé de rechargé la pages pour pour pouvoir supprimer ce derneier
+https://course.oc-static.com/projects/DWJ_FR_P5/DW+P5+-+Specifications+fonctionnelles.pdf
+derniere pages 
 
-https://openclassrooms.com/fr/paths/185/projects/675/assignment
+dans le but de donner les bonne information  de la pages
 
 
-
-order id recupperer l'id
-
+BTN sup erreur closset ligne 16172 point rouge
+product 49 id rajouter pour img
