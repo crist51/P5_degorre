@@ -183,7 +183,8 @@ for (let debutBoucle = 0; debutBoucle < listDeleteItem.length; debutBoucle++) {
 
     //----------------palie une erreur 
     if (listDeleteItem.length == 1) {
-      window.location.href = "http://127.0.0.1:5500/front/html/cart.html";
+      //   window.location.href = "http://127.0.0.1:5500/front/html/cart.html";
+      window.location.reload()
     }
     //----------------
 
@@ -410,20 +411,21 @@ Commander.addEventListener("click", (event) => {
     envoi = JSON.stringify(envoi)
     ////********************************************************************local storage//********************************************************************
 
-        fetch("http://localhost:3000/api/products/order", {
-          method: "post",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          mode: "no-cors",
-          body: (envoi)
-        })
-          .then(reponse => reponse.json())
-          .then(resultat => {
-            console.log(resultat);
-            //recuperer le resultat pour la confirm
-          })
+    fetch("http://localhost:3000/api/products/order", {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // mode: "no-cors",
+      body: (envoi)
+    })
+      .then(reponse => reponse.json())
+      .then(resultat => {
+        console.log(resultat);
+        window.location.href = "../html/confirmation.html?orderId=" + (resultat.orderId);
+        //recuperer le resultat pour la confirm
+      })
 
-      }// si form ok
+  }// si form ok
 
-    });
+});
