@@ -183,14 +183,13 @@ for (let debutBoucle = 0; debutBoucle < listDeleteItem.length; debutBoucle++) {
 
     //----------------palie une erreur 
     if (listDeleteItem.length == 1) {
-      //   window.location.href = "http://127.0.0.1:5500/front/html/cart.html";
       window.location.reload()
     }
-    //----------------
+  }
+  //----------------
 
-    if (listDeleteItem.length == 0) {
-      panierVide(); //panier vide
-    }
+  if (listDeleteItem.length == 0) {
+    panierVide(); //panier vide
   }
 }
 
@@ -393,9 +392,6 @@ Commander.addEventListener("click", (event) => {
       }
     });
     console.log(produits);
-
-
-
 
     let envoi = {
       contact: {
