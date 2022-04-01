@@ -15,6 +15,8 @@ function panierVide(message_vide) {
   var itemAbs = document.createElement("p");
   itemAbs.textContent = "Votre panier est vide";
   article.appendChild(itemAbs);
+  totalPrice.textContent = "0"
+  totalQuantity.textContent = "0";
 }
 
 if (key == null || key.length == 0) {
@@ -166,25 +168,22 @@ if (key != null) {
   for (let debutBoucle = 0; debutBoucle < key.length; debutBoucle++) {
 
     listDeleteItem[debutBoucle].addEventListener("click", function () {
-      //listDeleteItem[debutBoucle].addEventListener("click", function () {
       functionSup(this);
     })
     const functionSup = function (btnSup) {
-      console.log(listDeleteItem);
       //let pos = key.indexOf(debutBoucle);
       //console.log(pos);
-      //var el = key[debutBoucle].closest("article");
-      //var el = key[debutBoucle].closest("article");
+      //var el = listDeleteItem[debutBoucle].closest("article");
       //console.log(el);//selectionnne l'article le plus proche
       //el.remove();//suprime l'element du dome
-      console.log(listDeleteItem);//mes bouton supprimer
+      //console.log(listDeleteItem);//mes bouton supprimer
+      //console.log(listDeleteItem);//mes bouton supprimer
       key.splice(debutBoucle, 1);
       calculQuantity();
       calculPrice();
       console.log("-------- Apres Supretion --------");
       //supprimer la quantité et le prix
       localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
-      console.log(debutBoucle);
       window.location.reload();
     }
   }
