@@ -127,9 +127,7 @@ async function corp() {
     debutBoucle = 0
     let listePrix = document.getElementsByClassName("prixProduit")
     console.log(listePrix);
-    console.log(listePrix[0].textContent);
     var priceArray = [];
-    console.log(key[1].quantity);
 
     console.log(priceArray);
     function calculPrice(price) {
