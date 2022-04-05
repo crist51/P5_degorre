@@ -4,6 +4,15 @@ console.log(produitEnregistrerDansLeLocalStorage);
 
 var key = produitEnregistrerDansLeLocalStorage;
 
+
+async function getPrix(id)
+{
+    var reponse = await fetch("http://localhost:3000/api/products/" + id)
+    var produit = await reponse.json();
+    return produit.price;
+}
+
+
 //********************************************************************boucle de construction********************************************************************
 
 var debutBoucle = 0;
@@ -19,121 +28,110 @@ function panierVide(message_vide) {
   totalQuantity.textContent = "0";
 }
 
-if (key == null || key.length == 0) {
-  localStorage.clear();
-  panierVide();
-}
-else {
-  while (debutBoucle < key.length) {
-    var article = document.createElement("article");
-    article.classList.add("cart__item");
-    cart__items.appendChild(article);
-
-    //--------------------------------création div [img]
-    var cart__item__img = document.createElement("div");
-    cart__item__img.classList.add("cart__item__img");
-    article.appendChild(cart__item__img);
-
-    var image = document.createElement("img");
-    image.src = (key[debutBoucle].imageUrl);
-    image.alt = (key[debutBoucle].altTxt);
-    cart__item__img.appendChild(image);
-
-    //-------------------------------- création div = cart__item__content__description [non],[colors],[price],
-    var cart__item__content = document.createElement("div");
-    cart__item__content.classList.add("cart__item__content");
-    article.appendChild(cart__item__content);
-
-    var cart__item__content__description = document.createElement("div");
-    cart__item__content__description.classList.add("cart__item__content__description");
-    cart__item__content.appendChild(cart__item__content__description);
-
-    var nom = document.createElement("h2");
-    nom.textContent = (key[debutBoucle].name);
-    cart__item__content__description.appendChild(nom);
-
-    var colors = document.createElement("p");
-    colors.textContent = (key[debutBoucle].colors);
-    cart__item__content__description.appendChild(colors);
-
-    // var price = document.createElement("p");
-    //price.textContent = (key[debutBoucle].price);
-    // cart__item__content__description.appendChild(price);
-    //console.log(key[debutBoucle]._id);
-
-    let a = (key[debutBoucle]._id)//(key[debutBoucle]._id)
-
-    // fetch("http://localhost:3000/api/products/" + a)
-    //   .then(function (response) {
-    //     return response.json();
-    //   })
-    //   .then(function (reponceAPI) {
-    //     var price = document.createElement("p");
-
-    //     price.textContent = (reponceAPI.price);
-    //     cart__item__content__description.appendChild(price);
-
-    //   })
-    async function getPrix(id)
-{
-    var prix = await fetch("http://localhost:3000/api/products/" + id)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (reponceAPI) {
-        
-        return reponceAPI.price
-    })
-    
-    
-    var price = document.createElement("p");
-    console.log("fkfzekfùmlszf;");
-    price.textContent = (prix);
-    cart__item__content__description.appendChild(price);
-}
-
-getPrix(a)
-
-
-
-    //--------------------------------création div = cart__item__content__settings [quantity][delete]
-    var cart__item__content__seetings = document.createElement("div");
-    cart__item__content__seetings.classList.add("cart__item__content__settings");
-    cart__item__content.appendChild(cart__item__content__seetings);
-
-    //----------------------------------------------------------------création div = cart__item__content__settings__quantity [quantity]
-    var description = document.createElement("div");
-    description.classList.add("cart__item__content__settings__quantity");
-    cart__item__content__seetings.appendChild(description);
-
-    var qte = document.createElement("p");
-    qte.textContent = "qté";
-    description.appendChild(qte);
-
-    var quantite = document.createElement("input");
-    quantite.type = "number";
-    quantite.name = "itemQuantity";
-    quantite.min = "1";
-    quantite.max = "100";
-    quantite.value = (key[debutBoucle].quantity);
-    quantite.classList.add("itemQuantity");
-    description.appendChild(quantite);
-    //----------------------------------------------------------------création div = cart__item__content__settings__delete[delete]
-    var seeting = document.createElement("div");
-    seeting.classList.add("cart__item__content__settings__delete");
-    cart__item__content__seetings.appendChild(seeting);
-
-    var sup = document.createElement("p");
-    sup.classList.add("deleteItem");
-    sup.textContent = "Supprimer";
-    seeting.appendChild(sup);
-    debutBoucle++;
+async function  corp(){
+  if (key == null || key.length == 0) {
+    localStorage.clear();
+    panierVide();
   }
-}
-
-
-
-
+  else {
+    while (debutBoucle < key.length) {
+      var article = document.createElement("article");
+      article.classList.add("cart__item");
+      cart__items.appendChild(article);
+  
+      //--------------------------------création div [img]
+      var cart__item__img = document.createElement("div");
+      cart__item__img.classList.add("cart__item__img");
+      article.appendChild(cart__item__img);
+  
+      var image = document.createElement("img");
+      image.src = (key[debutBoucle].imageUrl);
+      image.alt = (key[debutBoucle].altTxt);
+      cart__item__img.appendChild(image);
+  
+      //-------------------------------- création div = cart__item__content__description [non],[colors],[price],
+      var cart__item__content = document.createElement("div");
+      cart__item__content.classList.add("cart__item__content");
+      article.appendChild(cart__item__content);
+  
+      var cart__item__content__description = document.createElement("div");
+      cart__item__content__description.classList.add("cart__item__content__description");
+      cart__item__content.appendChild(cart__item__content__description);
+  
+      var nom = document.createElement("h2");
+      nom.textContent = (key[debutBoucle].name);
+      cart__item__content__description.appendChild(nom);
+  
+      var colors = document.createElement("p");
+      colors.textContent = (key[debutBoucle].colors);
+      cart__item__content__description.appendChild(colors);
+  
+      // var price = document.createElement("p");
+      //price.textContent = (key[debutBoucle].price);
+      // cart__item__content__description.appendChild(price);
+      //console.log(key[debutBoucle]._id);
+  
+      let a = (key[debutBoucle]._id)//(key[debutBoucle]._id)
+  
+      // fetch("http://localhost:3000/api/products/" + a)
+      //   .then(function (response) {
+      //     return response.json();
+      //   })
+      //   .then(function (reponceAPI) {
+      //     var price = document.createElement("p");
+  
+      //     price.textContent = (reponceAPI.price);
+      //     cart__item__content__description.appendChild(price);
+  
+      //   })
+  
+      //    price.textContent = await getPrix(a);
+      const prix = await getPrix(a)
+      //getPrix(a).then(prix => {
+    
+        var price = document.createElement("p");
+        console.log(prix);
+        price.textContent = prix;
+        cart__item__content__description.appendChild(price);
+      //})
+  
+  
+  
+      //--------------------------------création div = cart__item__content__settings [quantity][delete]
+      var cart__item__content__seetings = document.createElement("div");
+      cart__item__content__seetings.classList.add("cart__item__content__settings");
+      cart__item__content.appendChild(cart__item__content__seetings);
+  
+      //----------------------------------------------------------------création div = cart__item__content__settings__quantity [quantity]
+      var description = document.createElement("div");
+      description.classList.add("cart__item__content__settings__quantity");
+      cart__item__content__seetings.appendChild(description);
+  
+      var qte = document.createElement("p");
+      qte.textContent = "qté";
+      description.appendChild(qte);
+  
+      var quantite = document.createElement("input");
+      quantite.type = "number";
+      quantite.name = "itemQuantity";
+      quantite.min = "1";
+      quantite.max = "100";
+      quantite.value = (key[debutBoucle].quantity);
+      quantite.classList.add("itemQuantity");
+      description.appendChild(quantite);
+      //----------------------------------------------------------------création div = cart__item__content__settings__delete[delete]
+      var seeting = document.createElement("div");
+      seeting.classList.add("cart__item__content__settings__delete");
+      cart__item__content__seetings.appendChild(seeting);
+  
+      var sup = document.createElement("p");
+      sup.classList.add("deleteItem");
+      sup.textContent = "Supprimer";
+      seeting.appendChild(sup);
+      debutBoucle++;
+    }
+  }
+  
 //********************************************************************les calcul quantité & price********************************************************************
 console.log(""); console.log("Quanntité & prix");
 
@@ -151,7 +149,7 @@ if (key != null) {
   calculQuantity();
   //-------------------------------prix
   var priceArray = [];
-
+  console.log(priceArray);
   function calculPrice(price) {
     var debutBoucle = 0;
     priceArray.length = 0;///reset la taille du tableau
@@ -170,6 +168,7 @@ if (key != null) {
   }
   calculPrice();
 }
+
 
 //*****************************************************************mise a jour de quantite*****************************************************************
 
@@ -415,3 +414,9 @@ Commander.addEventListener("click", (event) => {
   }// si form ok
 
 });
+
+}
+
+corp()
+
+
