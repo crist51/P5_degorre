@@ -66,36 +66,13 @@ async function  corp(){
       colors.textContent = (key[debutBoucle].colors);
       cart__item__content__description.appendChild(colors);
   
-      // var price = document.createElement("p");
-      //price.textContent = (key[debutBoucle].price);
-      // cart__item__content__description.appendChild(price);
-      //console.log(key[debutBoucle]._id);
-  
       let a = (key[debutBoucle]._id)//(key[debutBoucle]._id)
-  
-      // fetch("http://localhost:3000/api/products/" + a)
-      //   .then(function (response) {
-      //     return response.json();
-      //   })
-      //   .then(function (reponceAPI) {
-      //     var price = document.createElement("p");
-  
-      //     price.textContent = (reponceAPI.price);
-      //     cart__item__content__description.appendChild(price);
-  
-      //   })
-  
-      //    price.textContent = await getPrix(a);
-      const prix = await getPrix(a)
-      //getPrix(a).then(prix => {
-    
+        const prix = await getPrix(a)    
         var price = document.createElement("p");
         console.log(prix);
         price.textContent = prix;
         cart__item__content__description.appendChild(price);
-      //})
-  
-  
+        price.classList.add("prixProduit");
   
       //--------------------------------création div = cart__item__content__settings [quantity][delete]
       var cart__item__content__seetings = document.createElement("div");
@@ -149,6 +126,7 @@ if (key != null) {
   calculQuantity();
   //-------------------------------prix
   var priceArray = [];
+  //console.log (prixProduit);
   console.log(priceArray);
   function calculPrice(price) {
     var debutBoucle = 0;
