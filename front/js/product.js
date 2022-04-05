@@ -52,6 +52,7 @@ fetch("http://localhost:3000/api/products/" + id)
     //-----------------------------quantity
     var inputQuantity = document.getElementById("quantity")
     inputQuantity.value = 0
+
     //-------------------------La gestion du panier
 
     //selectionner le btn dans le dom
@@ -70,8 +71,8 @@ fetch("http://localhost:3000/api/products/" + id)
       var quantity = Number(document.getElementById("quantity").value)//rajout Number
       console.log(quantity);
 
-      //-------------------------condition de validation panier " voir pour peut etre juste metre un texte d'erreur"
-      if (quantity > 100 || quantity == 0 || colorSelect === "valeurDefaut") {
+      //-------------------------condition de validation panier
+      if (quantity > 100 || quantity <= 0 || colorSelect === "valeurDefaut") {
         alert("Veuillez indiquer une coloris" + "\n" + "Ou" + "\n" + "Veuillez indiquer le nombre de produit souhaité compris \"1\"  et \"100\"")
       } else {
 
@@ -82,7 +83,7 @@ fetch("http://localhost:3000/api/products/" + id)
           "colors": colorSelect,
           "_id": reponceAPI._id,
           "name": reponceAPI.name,
-          "price": reponceAPI.price,
+          //"price": reponceAPI.price,
           "imageUrl": reponceAPI.imageUrl,
           "altTxt": (reponceAPI.altTxt),
           "quantity": quantity,

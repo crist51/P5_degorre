@@ -56,9 +56,45 @@ else {
     colors.textContent = (key[debutBoucle].colors);
     cart__item__content__description.appendChild(colors);
 
+    // var price = document.createElement("p");
+    //price.textContent = (key[debutBoucle].price);
+    // cart__item__content__description.appendChild(price);
+    //console.log(key[debutBoucle]._id);
+
+    let a = (key[debutBoucle]._id)//(key[debutBoucle]._id)
+
+    // fetch("http://localhost:3000/api/products/" + a)
+    //   .then(function (response) {
+    //     return response.json();
+    //   })
+    //   .then(function (reponceAPI) {
+    //     var price = document.createElement("p");
+
+    //     price.textContent = (reponceAPI.price);
+    //     cart__item__content__description.appendChild(price);
+
+    //   })
+    async function getPrix(id)
+{
+    var prix = await fetch("http://localhost:3000/api/products/" + id)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (reponceAPI) {
+        
+        return reponceAPI.price
+    })
+    
+    
     var price = document.createElement("p");
-    price.textContent = (key[debutBoucle].price);
+    console.log("fkfzekfùmlszf;");
+    price.textContent = (prix);
     cart__item__content__description.appendChild(price);
+}
+
+getPrix(a)
+
+
 
     //--------------------------------création div = cart__item__content__settings [quantity][delete]
     var cart__item__content__seetings = document.createElement("div");
@@ -131,6 +167,7 @@ if (key != null) {
   }
   calculPrice();
 }
+
 //*****************************************************************mise a jour de quantite*****************************************************************
 
 console.log("");
@@ -145,6 +182,9 @@ for (let debutBoucle = 0; debutBoucle < inputQuantit.length; debutBoucle++) {
     if (key[debutBoucle].quantity != inputQuantit.value) {
       key[debutBoucle].quantity = inputQuantit.value;
       localStorage.setItem("key", JSON.stringify(produitEnregistrerDansLeLocalStorage));
+      if (inputQuantit.value <= 0) {
+        inputQuantit.value = 1
+      }
     }
     console.log("----------NEW QUANTITE----------");
     console.log(key);
@@ -171,13 +211,6 @@ if (key != null) {
       functionSup(this);
     })
     const functionSup = function (btnSup) {
-      //let pos = key.indexOf(debutBoucle);
-      //console.log(pos);
-      //var el = listDeleteItem[debutBoucle].closest("article");
-      //console.log(el);//selectionnne l'article le plus proche
-      //el.remove();//suprime l'element du dome
-      //console.log(listDeleteItem);//mes bouton supprimer
-      //console.log(listDeleteItem);//mes bouton supprimer
       key.splice(debutBoucle, 1);
       calculQuantity();
       calculPrice();
@@ -189,7 +222,13 @@ if (key != null) {
   }
 }
 
-
+//let pos = key.indexOf(debutBoucle);
+//console.log(pos);
+//var el = listDeleteItem[debutBoucle].closest("article");
+//console.log(el);//selectionnne l'article le plus proche
+//el.remove();//suprime l'element du dome
+//console.log(listDeleteItem);//mes bouton supprimer
+//console.log(listDeleteItem);//mes bouton supprimer
 
 console.log(key);
 console.log();
@@ -202,26 +241,10 @@ firstName.addEventListener("change", function () {
 })
 const validFirstName = function (firstName) {
   let testFirsName = false;
-  //commencez avec une maj
-  if (!/^[A-Z]/.test(firstName.value)) {//! si il n'y as pas c'est faux & debut
-    firstNameErrorMsg.textContent = "Commencez avec une majuscule";
+  if (!/^[a-zA-ZÀ-ÖØ-öø-ÿ\-]{2,40}$/.test(firstName.value)) {
+    firstNameErrorMsg.textContent = "Veillez saisir votre un prénom corectement";
     return false;
   }
-  //au mois 3 caractere
-  else if (firstName.value.length < 2) {
-    firstNameErrorMsg.textContent = "Pas assez de caratere";
-    return false;
-  }
-  //au moins une minuscule
-  else if (!/[a-z]/.test(firstName.value)) {
-    firstNameErrorMsg.textContent = "Il manque une minuscule";
-    return false;
-  }
-  else if (firstName.value.length > 45) {
-    firstNameErrorMsg.textContent = "Il y a trop de caractere";
-    return false;
-  }
-  //firstName valide
   else {
     testFirsName = true;
     firstNameErrorMsg.textContent = "";
@@ -237,25 +260,9 @@ lastName.addEventListener("change", function () {
 })
 const validLastName = function (lastName) {
   let testlastName = false
-  //commencez avec une maj
-  if (!/^[A-Z]/.test(lastName.value)) {
-    lastNameErrorMsg.textContent = "Commencez avec une majuscule";
+  if (!/^[a-zA-ZÀ-ÖØ-öø-ÿ\-]{2,40}$/.test(lastName.value)) {
+    lastNameErrorMsg.textContent = "Veillez saisir votre nom corectement";
     return false;
-  }
-  //au mois 3 caractere
-  else if (lastName.value.length < 2) {//inputPasword
-    lastNameErrorMsg.textContent = "Pas assez de caratere";
-    return false;
-  }
-  //au moins une minuscule
-  else if (!/[a-z]/.test(lastName.value)) {
-    lastNameErrorMsg.textContent = "Il manque une minuscule";
-    return false;
-  }
-  else if (lastName.value.length > 45) {
-    lastNameErrorMsg.textContent = "Il y a trop de caractere";
-    return false;
-    //lastName valide
   }
   else {
     testlastName = true;
@@ -272,22 +279,14 @@ address.addEventListener("change", function () {
 })
 const validAddress = function (address) {
   let testAddress = false
-  //commencez avec une maj
-  //au mois 3 caractere
-  if (address.value.length < 2) {
-    addressErrorMsg.textContent = "Pas assez de caratere";
+  if (!/^[a-zA-Z0-9À-ÖØ-öø-ÿ\-]/.test(address.value)) {
+    addressErrorMsg.textContent = "Veillez saisir votre adresse corectement";
     return false;
   }
-  //au moins une minuscule
-  else if (!/[a-z]/.test(address.value)) {
-    addressErrorMsg.textContent = "Il manque une minuscule";
+  else if (address.value.length > 40) {
+    cityErrorMsg.textContent = "Il y a trop de caractere";
     return false;
   }
-  else if (address.value.length > 45) {
-    addressErrorMsg.textContent = "Il y a trop de caractere";
-    return false;
-  }
-  //mdp valide
   else {
     testAddress = true
     addressErrorMsg.textContent = "";
@@ -303,26 +302,14 @@ city.addEventListener("change", function () {
 })
 const validCity = function (city) {
   let testCity = false;
-  //commencez avec une maj
-  if (!/^[A-Z]/.test(city.value)) {
-    cityErrorMsg.textContent = "Commencez avec une majuscule";
+  if (!/^[a-zA-ZÀ-ÖØ-öø-ÿ\-]/.test(city.value)) {
+    cityErrorMsg.textContent = "Veillez saisir votre ville corectement";
     return false;
   }
-  else if (city.value.length < 2) {//inputPasword
-    cityErrorMsg.textContent = "Pas assez de caratere";
-    return false;
-  }
-  //au moins une minuscule
-  else if (!/[a-z]/.test(city.value)) {
-    cityErrorMsg.textContent = "Il manque une minuscule";
-    return false;
-  }
-  //nombre dee caractere limit
-  else if (city.value.length > 45) {
+  else if (city.value.length > 40) {
     cityErrorMsg.textContent = "Il y a trop de caractere";
     return false;
   }
-  //city valide
   else {
     testCity = true;
     cityErrorMsg.textContent = "";
